@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "title": "Banner Bander",
+    "image": "bannerBander"
+  },
+  {
+    "id": 2,
+    "title": "Logo Bander",
+    "image": "logoBander"
+  },
+  {
+    "id": 3,
+    "title": "American Gangster",
+    "image": "americanGangster"
+  },
+  {
+    "id": 4,
+    "title": "Breaking Bad",
+    "image": "breakingBad"
+  },
+  {
+    "id": 5,
+    "title": "Starwars Jedi",
+    "image": "starwarsJedi"
+  },
+  {
+    "id": 6,
+    "title": "Guardians 2",
+    "image": "guardians2"
+  },
+  {
+    "id": 7,
+    "title": "Dark Knight",
+    "image": "darkKnight"
+  },
+  {
+    "id": 8,
+    "title": "Black Panther",
+    "image": "blackPanther"
+  }
+]
