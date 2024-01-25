@@ -1,0 +1,10 @@
+{
+    "greetings": {
+      "welcome": "Hoş Geldiniz!",
+      "goodMorning": "Günaydın!",
+      "goodAfternoon": "İyi Öğle!",
+      "goodEvening": "İyi Akşam!",
+      "goodNight": "İyi Geceler!"
+    }
+  }
+  
