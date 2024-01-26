@@ -12,8 +12,9 @@ export type RootStackParamList = {
   MoreNotifications: {} | undefined;
   MoreMyList: {} | undefined;
   MoreAppSettings: {} | undefined;
-  ModalWebView: {url : string} | undefined;
+  ModalWebView: {url: string} | undefined;
   ModalManageProfiles: {} | undefined;
+  StackAuth: {} | undefined;
 };
 
 export interface Show {
@@ -24,6 +25,6 @@ export interface Show {
 
 export interface Data {
   dumbData: Show[];
-  myList: (Show | { id: number; title: string; image?: undefined })[];
+  myList: (Show | {id: number; title: string; image?: undefined})[];
   previews: Show[];
 }

@@ -18,6 +18,7 @@ import ModalManageProfiles from '../../screens/ModalScreens/ModalManageProfiles'
 import ModalCastConnectScreen from '../../screens/ModalScreens/ModalCastConnect';
 
 import SplashScreen from '../../screens/SplashScreen';
+import StackAuth from '../stack/StackAuth';
 
 const Stack = createStackNavigator();
 
@@ -53,6 +54,8 @@ const RootNavigator: React.FC = () => {
       <Stack.Screen name="ModalWebView" component={ModalWebView} />
       <Stack.Screen name="ModalCastConnect" component={ModalCastConnectScreen} />
       <Stack.Screen name="TabNavigation" component={TabNavigation} />
+      <Stack.Screen name="StackAuth" component={StackAuth} />
+
     </Stack.Navigator>
   );
 };

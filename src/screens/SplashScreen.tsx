@@ -35,7 +35,7 @@ const SplashScreen: React.FC = () => {
       }),
     ]).start(() => {
       dispatch(setScreenLoading(true));
-      navigation.navigate('TabNavigation');
+      navigation.navigate('StackAuth');
     });
   }, [scaleAnimation, opacityAnimation]);
 
