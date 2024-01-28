@@ -5,10 +5,10 @@ import { store } from '../../store';
 import { ErrorResponse } from '../services/common/type';
 import { jwtDecode } from 'jwt-decode';
 import { sleep } from '../../utils/asyncUtil';
-import useLocalStorage from './useLocalStorage';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { StatusEnum } from '../../utils/colorUtil';
 import { logoutAction, setToken, setUser } from '../../store/login/loginSlice';
+import { clearAllLocalStorage, setLocalStorage } from './useLocalStorage';
 
 const cancelToken = axios.CancelToken.source();
 
@@ -42,11 +42,6 @@ axiosInstance.interceptors.response.use(
       refreshTokenReload: boolean;
     };
 
-    const { setValue, clearAllLocalStorage } = useLocalStorage<{
-      token: string;
-      userId: string;
-    }>('userData', { token: '', userId: '' });
-
     const { showToast } = useToastMessage(); 
 
     if (error.response?.status === 401 && !refreshTokenReload) {
@@ -64,7 +59,7 @@ axiosInstance.interceptors.response.use(
       try {
         const decodedUser: User = jwtDecode(refreshToken);
 
-        await setValue({ token: refreshToken, userId: decodedUser?.userId }); 
+        await setLocalStorage("user", JSON.stringify({ token: refreshToken, userId: decodedUser?.id })); 
 
         store.dispatch(setToken(refreshToken));
         store.dispatch(setUser(decodedUser));

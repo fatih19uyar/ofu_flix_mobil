@@ -1,73 +1,34 @@
-    import { useEffect, useState } from 'react';
-    import AsyncStorage from '@react-native-async-storage/async-storage';
-    import useToastMessage from './useToastMessage';
-    import { StatusEnum } from '../../utils/colorUtil';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-    const useLocalStorage = <T>(key: string, initialValue: T) => {
-    const [storedValue, setStoredValue] = useState<T>(initialValue);
-    const { showToast } = useToastMessage();
+export const clearAllLocalStorage = async () => {
+  try {
+    await AsyncStorage.clear();
+  } catch (error) {
+    console.error('Error clearing all data from AsyncStorage:', error);
+  }
+};
 
-    useEffect(() => {
-        const loadStoredValue = async () => {
-        try {
-            const storedItem = await AsyncStorage.getItem(key);
-            if (storedItem !== null) {
-            setStoredValue(JSON.parse(storedItem));
-            }
-        } catch (error) {
-            console.error('Error loading data from AsyncStorage:', error);
-        }
-        };
+export const getLocalStorageItem = async (key: string) => {
+  try {
+    return await AsyncStorage.getItem(key);
+  } catch (error) {
+    console.error('Error getting data from AsyncStorage:', error);
+    return null;
+  }
+};
 
-        loadStoredValue();
-    }, [key]);
+export const setLocalStorage = async (key: string, value: string) => {
+  try {
+    await AsyncStorage.setItem(key, value);
+  } catch (error) {
+    console.error('Error saving data to AsyncStorage:', error);
+  }
+};
 
-    const setValue = async (value: T) => {
-        try {
-        const valueToStore = JSON.stringify(value);
-        await AsyncStorage.setItem(key, valueToStore);
-        setStoredValue(value);
-        showToast(StatusEnum.SUCCESS, 'Success', 'Value updated!');
-        } catch (error) {
-        console.error('Error saving data to AsyncStorage:', error);
-        showToast(StatusEnum.ERROR, 'Error', 'Failed to update value');
-        }
-    };
-
-    const getValue = async () => {
-        try {
-        const storedItem = await AsyncStorage.getItem(key);
-        if (storedItem !== null) {
-            return JSON.parse(storedItem);
-        }
-        } catch (error) {
-        console.error('Error getting data from AsyncStorage:', error);
-        }
-        return null;
-    };
-
-    const removeValue = async () => {
-        try {
-        await AsyncStorage.removeItem(key);
-        setStoredValue(initialValue);
-        showToast(StatusEnum.SUCCESS, 'Success', 'Value removed!');
-        } catch (error) {
-        console.error('Error removing data from AsyncStorage:', error);
-        showToast(StatusEnum.ERROR, 'Error', 'Failed to remove value');
-        }
-    };
-
-    const clearAllLocalStorage = async () => {
-        try {
-        await AsyncStorage.clear();
-        showToast(StatusEnum.SUCCESS, 'Success', 'All data removed!');
-        } catch (error) {
-        console.error('Error clearing all data from AsyncStorage:', error);
-        showToast( StatusEnum.ERROR, 'Error', 'Failed to clear all data');
-        }
-    };
-
-    return { storedValue, setValue, getValue, removeValue, clearAllLocalStorage };
-    };
-
-    export default useLocalStorage;
+export const removeLocalStorageByKey = async (key: string) => {
+  try {
+    await AsyncStorage.removeItem(key);
+  } catch (error) {
+    console.error('Error clearing ' + key + ' data from AsyncStorage:', error);
+  }
+};
