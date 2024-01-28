@@ -30,8 +30,7 @@ export const loginAction = createAsyncThunk(
 
     dispatch(setUser(decodedUser));
     AsyncStorage.setItem(process.env.REACT_APP_ACCESS_TOKEN_KEY!, data?.accessToken ?? '');
-    AsyncStorage.setItem('userKey', decodedUser.sessionInfo?.username);
-
+    AsyncStorage.setItem('user', JSON.stringify(decodedUser));
     return {
       token: data?.accessToken ?? '',
       user: decodedUser,
