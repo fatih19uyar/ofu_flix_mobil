@@ -4,7 +4,6 @@ import {
   Animated,
   Easing,
   Keyboard,
-  Text,
   TextInput,
   TextInputProps,
   TouchableOpacity,
@@ -66,6 +65,7 @@ const CommonTextInput: React.FC<CommonTextInputProps> = ({
   onChangeText,
   placeholder,
   error,
+  ...props
 }) => {
   const [focus, setFocus] = useState(false);
   const [text, setText] = useState('');
@@ -140,6 +140,7 @@ const CommonTextInput: React.FC<CommonTextInputProps> = ({
             placeholderTextColor={colors.searchIcon}
             selectionColor={colors.brandPrimary}
             focus={focus}
+            {...props}
           />
           {focus && (
             <DeleteTextContainer style={{opacity: cancelOpacity}}>
