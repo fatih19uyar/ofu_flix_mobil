@@ -19,14 +19,4 @@ const SvgCheck: React.FC<SvgCheckProps> = ({ active = true, size = 24 }) => {
   );
 };
 
-SvgCheck.defaultProps = {
-  active: true,
-  size: 24,
-};
-
-SvgCheck.propTypes = {
-  active: PropTypes.bool,
-  size: PropTypes.number,
-};
-
 export default React.memo(SvgCheck);

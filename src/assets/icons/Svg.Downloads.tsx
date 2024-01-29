@@ -23,14 +23,4 @@ const SvgDownloads: React.FC<SvgDownloadsProps> = ({ fill, size }) => {
   );
 };
 
-SvgDownloads.defaultProps = {
-  fill: colors.black,
-  size: 24,
-};
-
-SvgDownloads.propTypes = {
-  fill: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  size: PropTypes.number,
-};
-
 export default React.memo(SvgDownloads);

@@ -23,16 +23,4 @@ const SvgCross: React.FC<SvgCrossProps> = ({ active = false, size = 24, style })
     />
   </Svg>
 );
-
-SvgCross.defaultProps = {
-  active: false,
-  size: 24,
-};
-
-SvgCross.propTypes = {
-  active: PropTypes.bool,
-  size: PropTypes.number,
-  style: PropTypes.object,
-};
-
 export default memo(SvgCross);
