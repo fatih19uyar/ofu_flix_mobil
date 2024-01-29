@@ -2,11 +2,6 @@ import * as React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {colors, gStyle} from '../../constants';
 
-// import StackHome from './StackHome';
-// import StackSearch from './StackSearch';
-// import StackDownloads from './StackDownloads';
-// import StackMore from './StackMore';
-
 // icons
 import SvgHome from '../../assets/icons/Svg.Home';
 import SvgSearch from '../../assets/icons/Svg.Search';
@@ -14,9 +9,6 @@ import SvgDownloads from '../../assets/icons/Svg.Downloads';
 import SvgMenu from '../../assets/icons/Svg.Menu';
 
 // grabs stacks
-import AppNavigator from './AuthNavigator';
-import DashBoardScreen from '../../screens/DashBoardScreen';
-import Home from '../../screens/HomeScreen';
 import StackDownloads from '../stack/StackDownloads';
 import StackHome from '../stack/StackHome';
 import StackSearch from '../stack/StackSearch';

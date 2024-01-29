@@ -15,6 +15,10 @@ export type RootStackParamList = {
   ModalWebView: {url: string} | undefined;
   ModalManageProfiles: {} | undefined;
   StackAuth: {} | undefined;
+  RegisterScreen : {} | undefined;
+  LoginScreen : {} | undefined;
+  ForgotPasswordScreen : {} | undefined;
+  ResetPasswordScreen : {} | undefined;
 };
 
 export interface Show {

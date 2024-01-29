@@ -8,8 +8,6 @@ import {AppDispatch, RootState} from '../../store';
 import {setToken, setUser} from '../../store/login/loginSlice';
 
 import TabNavigation from './TabNavigation';
-import AuthNavigator from './AuthNavigator';
-import AppNavigator from './AppNavigator';
 
 import ModalAddProfile from '../../screens/ModalScreens/ModalAddProfile';
 import ModalWebView from '../../screens/ModalScreens/ModalWebView';
@@ -60,10 +58,5 @@ const RootNavigator: React.FC = () => {
   );
 };
 
-const RootScreen: React.FC = () => {
-  const isAuthenticated = useSelector<RootState>(state => state.auth.token);
-
-  return isAuthenticated ? <AppNavigator /> : <AuthNavigator />;
-};
 
 export default RootNavigator;

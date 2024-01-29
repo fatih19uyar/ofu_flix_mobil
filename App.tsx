@@ -11,6 +11,7 @@ import Toast from 'react-native-toast-message';
 
 import './src/i18n/i18n';
 import 'intl-pluralrules';
+
 const App = () => {
   const currentTheme = 'light'; // Seçilen tema
   return (
