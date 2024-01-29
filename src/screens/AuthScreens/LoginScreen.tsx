@@ -1,64 +1,71 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {StatusBar, View} from 'react-native';
-import {Button} from 'react-native-paper';
 import styled from 'styled-components/native';
 import CommonTextInput from '../../components/CommonTextInput';
 import useToastMessage from '../../common/hooks/useToastMessage';
-import { StatusEnum } from '../../utils/colorUtil';
-import { useAppDispatch } from '../../common/hooks/useStore';
-import { setLoading } from '../../store/common/commonSlice';
-import { loginAction } from '../../store/login/loginSlice';
-import { useTypedNavigation } from '../../common/hooks/useNavigation';
+import {StatusEnum} from '../../utils/colorUtil';
+import {useAppDispatch} from '../../common/hooks/useStore';
+import {setLoading} from '../../store/common/commonSlice';
+import { setUser} from '../../store/login/loginSlice';
+import {useTypedNavigation} from '../../common/hooks/useNavigation';
 import CommonButton from '../../components/CommonButton';
+import data from '../../mockData/data';
+import {useForm, Controller} from 'react-hook-form';
+import * as yup from 'yup';
+import {yupResolver} from '@hookform/resolvers/yup'; 
+import { useHeaderHeight } from '@react-navigation/elements';
+
 
 const Container = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
-  background-color: #1a1a1a;
   padding-horizontal: 20px;
 `;
 
 const Logo = styled.Image`
   margin-bottom: 20px;
 `;
-
-const LoginButton = styled(Button).attrs({
-  mode: 'contained',
-  color: '#4CAF50',
-})`
-  width: 80%;
-  height: 40px;
-  justify-content: center;
-  align-items: center;
-`;
+interface FormData {
+  username: string;
+  password: string;
+}
 
 const LoginScreen: React.FC = () => {
   const {showToast} = useToastMessage();
   const dispatch = useAppDispatch();
-  const navigation = useTypedNavigation();
-  const [username, setUsername] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
 
-  const handleLogin = async () => {
-    console.log('Login pressed:', username, password);
+  const navigation = useTypedNavigation();
+  const headerHeight = useHeaderHeight();
+
+  const schema = yup.object().shape({
+    username: yup.string().required('Username is required'),
+    password: yup.string().required('Password is required'),
+  });
+  const {control,handleSubmit,formState: {errors}} = useForm({
+    resolver: yupResolver(schema),
+  });
+
+  const handleLogin = (values: FormData) => {
     try {
-      if (username === 'admin' && password === 'admin') {
-        showToast(StatusEnum.SUCCESS, 'Login successful');
-        dispatch(setLoading(true));
-        
-        // await dispatch(loginAction({
-        //   username: username,
-        //   password: password,
-        //   remember: false
-        // }));
+      dispatch(setLoading(true));
+
+      const user = data.userData.find(
+        user =>
+          user.username === values.username &&
+          user.password === values.password,
+      );
+      if (user) {
+        dispatch(setUser(user));
         setTimeout(()=>{
+          navigation.navigate('TabNavigation'); 
           dispatch(setLoading(false));
-          navigation.navigate('TabNavigation');
-        },1500)
+        },1500);
       } else {
-        dispatch(setLoading(false));
-        showToast(StatusEnum.ERROR, 'Invalid username or password');
+        setTimeout(()=>{
+          showToast(StatusEnum.ERROR, 'Invalid username or password');
+          dispatch(setLoading(false));
+        },1500); 
       }
     } catch (error) {
       console.error('Login error:', error);
@@ -66,25 +73,50 @@ const LoginScreen: React.FC = () => {
       dispatch(setLoading(false));
     }
   };
-  
 
   return (
     <Container>
       <StatusBar barStyle="light-content" />
       <Logo source={require('../../assets/images/ofu_flix.png')} />
-      <CommonTextInput
-        placeholder="Username"
-        value={username}
-        onChangeText={setUsername}
+      <Controller
+        control={control}
+        render={({field}) => (
+          <CommonTextInput
+            placeholder="Username"
+            value={field.value}
+            onChangeText={value => field.onChange(value)}
+            error={
+              errors.username && {error: true, message: errors.username.message}
+            }
+          />
+        )}
+        name="username"
+        defaultValue=""
       />
-      <CommonTextInput
-        placeholder="Password"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
+      <Controller
+        control={control}
+        render={({field}) => (
+          <CommonTextInput
+            placeholder="Password"
+            value={field.value}
+            onChangeText={value => field.onChange(value)}
+            secureTextEntry
+            error={
+              errors.password && {error: true, message: errors.password.message}
+            }
+          />
+        )}
+        name="password"
+        defaultValue=""
       />
-      <View style={{padding:20}} />
-      <CommonButton onPress={handleLogin} label="Login"/>
+      <View style={{padding: 10}} />
+      <CommonButton onPress={handleSubmit(handleLogin)} label="LOGIN" />
+      <CommonButton
+        type="text"
+        onPress={() => navigation.navigate('RegisterScreen')}
+        label="Don't you have an account? Register now!"
+      />
+      <View style={{padding: headerHeight - 30}} />
     </Container>
   );
 };
