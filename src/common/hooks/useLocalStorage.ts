@@ -1,13 +1,15 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { device } from '../../constants';
 
 export const clearAllLocalStorage = async () => {
   try {
-    await AsyncStorage.clear();
+    device.iOS
+      ? await AsyncStorage.getAllKeys().then(AsyncStorage.multiRemove)
+      : await AsyncStorage.clear();
   } catch (error) {
     console.error('Error clearing all data from AsyncStorage:', error);
   }
 };
-
 export const getLocalStorageItem = async (key: string) => {
   try {
     return await AsyncStorage.getItem(key);
