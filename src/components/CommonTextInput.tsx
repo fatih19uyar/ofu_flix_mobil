@@ -13,15 +13,18 @@ import {
 import {colors, fonts, gStyle} from '../constants';
 import SvgCross from '../assets/icons/Svg.Cross';
 import GradientInput from './ColorFullBorder';
+import SvgOpenEye from '../assets/icons/Svg.OpenEye';
+import SvgCloseEye from '../assets/icons/Svg.CloseEye';
 
 interface SizeProps extends ViewProps {
   width?: number;
 }
 interface CommonTextInputProps extends TextInputProps {
   label?: string;
-  error?: {error: boolean; message: string};
+  error?: {error: boolean; message?: string}| undefined;
   onChangeText: (text: string) => void;
   placeholder?: string;
+  secretValue?: boolean;
 }
 
 const Container = styled.View<SizeProps>`
@@ -59,12 +62,14 @@ const DeleteTextContainer = styled(Animated.View)`
 const ErrorText = styled.Text`
   color: red;
   margin-top: 5px;
+  text-align: center;
 `;
 
 const CommonTextInput: React.FC<CommonTextInputProps> = ({
   onChangeText,
   placeholder,
   error,
+  secretValue=false,
   ...props
 }) => {
   const [focus, setFocus] = useState(false);
@@ -72,7 +77,7 @@ const CommonTextInput: React.FC<CommonTextInputProps> = ({
   const cancelOpacity = useRef(new Animated.Value(0)).current;
   const inputWidth = useRef(new Animated.Value(100)).current;
   const inputContainerWidth = useRef(new Animated.Value(100)).current;
-
+  const [secretValueData, setSecretValueData] = useState(false)
   const onBlur = () => {
     setFocus(false);
 
@@ -118,9 +123,8 @@ const CommonTextInput: React.FC<CommonTextInputProps> = ({
   }, [text]);
 
   return (
-    
-      <Container>
-        <GradientInput>
+    <Container>
+      <GradientInput>
         <InputContainer
           style={{
             width: inputContainerWidth.interpolate({
@@ -139,10 +143,20 @@ const CommonTextInput: React.FC<CommonTextInputProps> = ({
             value={text}
             placeholderTextColor={colors.searchIcon}
             selectionColor={colors.brandPrimary}
+            secureTextEntry={secretValueData}
             focus={focus}
             {...props}
           />
-          {focus && (
+           {secretValue && (
+            <DeleteTextContainer style={{opacity: cancelOpacity}}>
+            <TouchableOpacity
+              activeOpacity={gStyle.activeOpacity}
+              onPress={() => setSecretValueData(!secretValueData)}>
+                {secretValueData ? <SvgCloseEye size={24} /> : <SvgOpenEye size={24} />}
+            </TouchableOpacity>
+            </DeleteTextContainer>
+          )}
+          {!secretValue && focus && (
             <DeleteTextContainer style={{opacity: cancelOpacity}}>
               <TouchableOpacity
                 activeOpacity={gStyle.activeOpacity}
@@ -152,10 +166,9 @@ const CommonTextInput: React.FC<CommonTextInputProps> = ({
             </DeleteTextContainer>
           )}
         </InputContainer>
-        </GradientInput>
-        {error?.error && <ErrorText>{error.message}</ErrorText>}
-      </Container>
-    
+      </GradientInput>
+      {error?.error && <ErrorText>{error.message}</ErrorText>}
+    </Container>
   );
 };
 

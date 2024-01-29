@@ -17,7 +17,7 @@ const ColorFullBorder: React.FC<GradientInputProps> = ({ children }) => {
   useEffect(() => {
     const intervalId = setInterval(() => {
       setAngle((prevAngle) => (prevAngle + angleStep) % 360);
-    }, 100); 
+    }, 30); 
 
     return () => clearInterval(intervalId);
   }, []);

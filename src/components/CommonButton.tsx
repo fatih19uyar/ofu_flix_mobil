@@ -12,6 +12,7 @@ interface CommonButtonProps {
   label?: string;
   onPress: () => void;
   error?: {error: boolean; message: string};
+  type?: 'text' | 'outline';
 }
 
 const Container = styled.View<SizeProps>`
@@ -41,7 +42,7 @@ const ErrorText = styled.Text`
   margin-top: 5px;
 `;
 
-const CommonButton: React.FC<CommonButtonProps> = ({onPress, label, error}) => {
+const CommonButton: React.FC<CommonButtonProps> = ({onPress, label, error, type , ...props}) => {
   const [isPressed, setIsPressed] = useState(false);
   const cancelOpacity = useRef(new Animated.Value(0)).current;
 
@@ -64,23 +65,61 @@ const CommonButton: React.FC<CommonButtonProps> = ({onPress, label, error}) => {
       useNativeDriver: false,
     }).start();
   };
+  switch (type) {
+    case 'outline':
+      return (
+        <Container>
+          <TouchableOpacity
+            activeOpacity={gStyle.activeOpacity}
+            onPress={onPress}
+            onPressIn={onPressIn}
+            onPressOut={onPressOut}
+            {...props}>
+            <ButtonContainer>
+              <ButtonText focus={false} isPressed={isPressed}>
+                {label}
+              </ButtonText>
+            </ButtonContainer>
+          </TouchableOpacity>
+          {error?.error && <ErrorText>{error.message}</ErrorText>}
+        </Container>
+      );
 
-  return (
-    <Container>
-      <TouchableOpacity
-        activeOpacity={gStyle.activeOpacity}
-        onPress={onPress}
-        onPressIn={onPressIn}
-        onPressOut={onPressOut}>
-        <ButtonContainer>
-          <ButtonText focus={false} isPressed={isPressed}>
-            {label}
-          </ButtonText>
-        </ButtonContainer>
-      </TouchableOpacity>
-      {error?.error && <ErrorText>{error.message}</ErrorText>}
-    </Container>
-  );
+    case 'text':
+      return (
+        <Container width={100}>
+          <TouchableOpacity
+            activeOpacity={gStyle.activeOpacity}
+            onPress={onPress}
+            onPressIn={onPressIn}
+            onPressOut={onPressOut}
+            {...props}>
+            <ButtonText style={{opacity:0.2}}focus={false} isPressed={isPressed}>
+              {label}
+            </ButtonText>
+          </TouchableOpacity>
+        </Container>
+      );
+    default:
+        return (
+            <Container>
+              <TouchableOpacity
+                activeOpacity={gStyle.activeOpacity}
+                onPress={onPress}
+                onPressIn={onPressIn}
+                 onPressOut={onPressOut}
+                 {...props}>
+                <ButtonContainer>
+                  <ButtonText focus={false} isPressed={isPressed}>
+                    {label}
+                  </ButtonText>
+                </ButtonContainer>
+              </TouchableOpacity>
+              {error?.error && <ErrorText>{error.message}</ErrorText>}
+            </Container>
+          );
+  }
+ 
 };
 
 export default CommonButton;
