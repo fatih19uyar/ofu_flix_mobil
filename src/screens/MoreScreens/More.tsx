@@ -11,20 +11,15 @@ import SvgBell from '../../assets/icons/Svg.Bell';
 import SvgCheck from '../../assets/icons/Svg.Check';
 import {useTypedNavigation} from '../../common/hooks/useNavigation';
 import TouchLineItem from '../../components/Touch/TouchLineItem';
-import useToastMessage from '../../common/hooks/useToastMessage';
+import { clearAllLocalStorage } from '../../common/hooks/useLocalStorage';
+import { useAppDispatch } from '../../common/hooks/useStore';
+import { logout } from '../../store/login/loginSlice';
+import { setLoading } from '../../store/common/commonSlice';
+import { initialRouteNameSet } from '../../store/navigation/navigationSlice';
 
-
-// full :: https://help.netflix.com/legal/privacy?headless=true&locale=en-US
 const privacyUrl = 'https://help.netflix.com/legal/privacy?headless=true';
 
-const alertSignOut = () => {
-  Alert.alert(
-    'Sign Out',
-    'Are you sure that you want to sign out?',
-    [{text: 'No'}, {text: 'Yes'}],
-    {cancelable: false},
-  );
-};
+
 
 interface MoreProps {}
 
@@ -43,7 +38,26 @@ const VersionText = styled.Text`
 const More: React.FC<MoreProps> = () => {
   const navigation = useTypedNavigation();
   const appVersion = require('../../../package.json').version;
-  const { showToast } = useToastMessage();
+  const dispatch = useAppDispatch();
+
+  const alertSignOut = () => {
+    Alert.alert(
+      'Sign Out',
+      'Are you sure that you want to sign out?',
+      [{text: 'No'}, {text: 'Yes', onPress: () => logOutFunc()}],
+      {cancelable: false},
+    );
+  };
+  const logOutFunc = async () => {
+    dispatch(setLoading(true));
+    dispatch(logout())
+    await clearAllLocalStorage();
+    setTimeout(()=>{
+      dispatch(initialRouteNameSet({initialRouteName: "StackAuth"}))
+      dispatch(setLoading(false));
+    },1000)
+  };
+  
  
   return (
     <Container>

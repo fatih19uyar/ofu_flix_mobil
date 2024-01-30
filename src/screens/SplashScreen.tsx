@@ -1,10 +1,6 @@
 import React, {useEffect} from 'react';
 import {View, Image, Animated, Easing} from 'react-native';
 import styled from 'styled-components/native';
-import {useAppDispatch, useAppSelector} from '../common/hooks/useStore';
-import {shallowEqual} from 'react-redux';
-import {setScreenLoading} from '../store/common/commonSlice';
-import {useTypedNavigation} from '../common/hooks/useNavigation';
 
 const StyledContainer = styled(View)`
   background-color: #000;
@@ -14,10 +10,8 @@ const StyledContainer = styled(View)`
 `;
 
 const SplashScreen: React.FC = () => {
-  const dispatch = useAppDispatch();
   const scaleAnimation = new Animated.Value(0);
   const opacityAnimation = new Animated.Value(0);
-  const navigation = useTypedNavigation();
 
   useEffect(() => {
     Animated.parallel([
@@ -33,9 +27,7 @@ const SplashScreen: React.FC = () => {
         easing: Easing.linear,
         useNativeDriver: true,
       }),
-    ]).start(() => {
-      dispatch(setScreenLoading(true));
-      navigation.navigate('StackAuth');
+    ]).start(async () => {
     });
   }, [scaleAnimation, opacityAnimation]);
 

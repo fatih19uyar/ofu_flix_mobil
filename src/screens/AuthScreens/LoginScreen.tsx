@@ -14,6 +14,8 @@ import {useForm, Controller} from 'react-hook-form';
 import * as yup from 'yup';
 import {yupResolver} from '@hookform/resolvers/yup'; 
 import { useHeaderHeight } from '@react-navigation/elements';
+import { setLocalStorage } from '../../common/hooks/useLocalStorage';
+import { initialRouteNameSet } from '../../store/navigation/navigationSlice';
 
 
 const Container = styled.View`
@@ -37,7 +39,7 @@ const LoginScreen: React.FC = () => {
 
   const navigation = useTypedNavigation();
   const headerHeight = useHeaderHeight();
-
+  
   const schema = yup.object().shape({
     username: yup.string().required('Username is required'),
     password: yup.string().required('Password is required'),
@@ -56,9 +58,10 @@ const LoginScreen: React.FC = () => {
           user.password === values.password,
       );
       if (user) {
+        setLocalStorage("user",JSON.stringify(user))
         dispatch(setUser(user));
         setTimeout(()=>{
-          navigation.navigate('TabNavigation'); 
+          dispatch(initialRouteNameSet({initialRouteName:'AppNavigation'}))
           dispatch(setLoading(false));
         },1500);
       } else {

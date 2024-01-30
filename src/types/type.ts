@@ -19,6 +19,8 @@ export type RootStackParamList = {
   LoginScreen : {} | undefined;
   ForgotPasswordScreen : {} | undefined;
   ResetPasswordScreen : {} | undefined;
+  ProfileSelectionScreen : {} | undefined;
+  AppNavigation: {} | undefined;
 };
 
 export interface Show {

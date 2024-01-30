@@ -57,12 +57,10 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     logout: (state: AuthState): AuthState => {
-      AsyncStorage.clear();
       return initialState;
     },
     setUser: (state: AuthState, action: PayloadAction<User>): AuthState => {
       const tempState = {...state};
-
       tempState.user = action.payload;
       return tempState;
     },
