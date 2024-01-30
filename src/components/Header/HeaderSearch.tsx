@@ -53,7 +53,11 @@ const CancelText = styled(Text)`
   text-align: center;
 `;
 
-const HeaderSearch: React.FC = () => {
+interface HeaderSearchProps {
+  setSearchText: (value:string)=>void; 
+}
+
+const HeaderSearch: React.FC<HeaderSearchProps> = ({setSearchText}) => {
   const [focus, setFocus] = useState(false);
   const [text, setText] = useState('');
 
@@ -63,7 +67,6 @@ const HeaderSearch: React.FC = () => {
 
   const onBlur = () => {
     setFocus(false);
-
     if (text === '') {
       Animated.timing(inputWidth, {
         duration: 300,
@@ -83,11 +86,11 @@ const HeaderSearch: React.FC = () => {
   const onCancel = () => {
     Keyboard.dismiss();
     setText('');
+    setSearchText('');
   };
 
   const onFocus = () => {
     setFocus(true);
-
     Animated.timing(inputWidth, {
       duration: 300,
       toValue: 80,
@@ -105,6 +108,7 @@ const HeaderSearch: React.FC = () => {
 
 
   useEffect(() => {
+    setSearchText(text);
     text === '' ? setInputContainerWidth(100) : setInputContainerWidth(80);
   }, [text])
 
