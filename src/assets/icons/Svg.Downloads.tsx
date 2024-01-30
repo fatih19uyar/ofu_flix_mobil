@@ -8,7 +8,7 @@ interface SvgDownloadsProps {
   size?: number;
 }
 
-const SvgDownloads: React.FC<SvgDownloadsProps> = ({ fill, size }) => {
+const SvgDownloads: React.FC<SvgDownloadsProps> = ({ fill, size=24 }) => {
   return (
     <Svg height={size} width={size} viewBox="0 0 24 24">
       <Path
