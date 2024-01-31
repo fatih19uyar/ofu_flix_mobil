@@ -74,10 +74,10 @@ const Home: React.FC = () => {
         <ShowScroller dataset="myList" handlePress={openModal} />
 
         <Text style={gStyle.heading}>Popular on Netflix</Text>
-        <ShowScroller handlePress={openModal} />
+        <ShowScroller dataset='dumbData' handlePress={openModal} />
 
         <Text style={gStyle.heading}>Trending Now</Text>
-        <ShowScroller handlePress={openModal} />
+        <ShowScroller dataset='previews' handlePress={openModal} />
 
         <View style={gStyle.spacer3} />
       </ScrollView>

@@ -2,41 +2,49 @@
   {
     "id": 1,
     "title": "Banner Bander",
-    "image": "bannerBander"
+    "image": "bannerBander",
+    "desc": "Banner Bander is an exciting show with thrilling moments."
   },
   {
     "id": 2,
     "title": "Logo Bander",
-    "image": "logoBander"
+    "image": "logoBander",
+    "desc": "Logo Bander is a captivating series with unexpected twists."
   },
   {
     "id": 3,
     "title": "American Gangster",
-    "image": "americanGangster"
+    "image": "americanGangster",
+    "desc": "American Gangster follows the story of a notorious gangster in the USA."
   },
   {
     "id": 4,
     "title": "Breaking Bad",
-    "image": "breakingBad"
+    "image": "breakingBad",
+    "desc": "Breaking Bad is a critically acclaimed series about a high school chemistry teacher turned methamphetamine manufacturer."
   },
   {
     "id": 5,
     "title": "Starwars Jedi",
-    "image": "starwarsJedi"
+    "image": "starwarsJedi",
+    "desc": "Starwars Jedi takes you on an epic journey in a galaxy far, far away."
   },
   {
     "id": 6,
     "title": "Guardians 2",
-    "image": "guardians2"
+    "image": "guardians2",
+    "desc": "Guardians of the Galaxy, Vol. 2 continues the adventures of the intergalactic misfits."
   },
   {
     "id": 7,
     "title": "Dark Knight",
-    "image": "darkKnight"
+    "image": "darkKnight",
+    "desc": "The Dark Knight is a superhero film that explores the psyche of the iconic character Batman."
   },
   {
     "id": 8,
     "title": "Black Panther",
-    "image": "blackPanther"
+    "image": "blackPanther",
+    "desc": "Black Panther is a Marvel superhero film featuring the king of the fictional African nation of Wakanda."
   }
 ]
