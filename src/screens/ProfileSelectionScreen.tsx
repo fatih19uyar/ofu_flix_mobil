@@ -17,11 +17,14 @@ const Logo = styled.Image`
 `;
 
 const ProfileSelectionScreen: React.FC = (props: Props) => {
+  const handleSelection = (id: number) => {
+    console.log(id);
+  }
   return (
     <Container>
       <StatusBar barStyle="light-content" />
       <Logo source={require('../assets/images/ofu_flix.png')} />
-      <ProfileList/>
+      <ProfileList handleSelection={handleSelection}/>
     </Container>
   )
 }

@@ -17,7 +17,11 @@ const Stack = createNativeStackNavigator<StackParamList>();
 
 function StackMore() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        animation: 'slide_from_right',
+        headerShown: false,
+      }}>
       <Stack.Screen name="More" component={MoreScreen} />
       <Stack.Screen name="MoreAppSettings" component={MoreAppSettingsScreen} />
       <Stack.Screen name="MoreMyList" component={MoreMyListScreen} />
