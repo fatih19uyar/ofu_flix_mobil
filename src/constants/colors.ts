@@ -39,5 +39,8 @@ export default {
   
     // cast connect modal
     castConnectBg: '#181818',
-    castConnectDeviceText: '#58b1e2'
+    castConnectDeviceText: '#58b1e2',
+
+    //showDetails 
+    detailsBg: 'rgba(164, 164, 164, 0.5)'
   };

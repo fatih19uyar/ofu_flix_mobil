@@ -27,10 +27,11 @@ export interface Show {
   id: number;
   title: string;
   image: string;
+  desc: string;
 }
 
 export interface Data {
-  dumbData: Show[];
-  myList: (Show | {id: number; title: string; image?: undefined})[];
-  previews: Show[];
+  dumbData: (Show | {id: number; title: string; image?: undefined, desc?: string})[];
+  myList: (Show | {id: number; title: string; image?: undefined, desc?: string})[];
+  previews: (Show | {id: number; title: string; image?: undefined, desc?: string})[];
 }

@@ -1,9 +1,6 @@
-// ShowScroller.tsx
-
 import React from 'react';
-import { FlatList, Image, ViewStyle, ImageStyle } from 'react-native';
+import { FlatList, Image, ViewStyle, ImageStyle, TouchableOpacity } from 'react-native';
 import styled from 'styled-components/native';
-import PropTypes from 'prop-types';
 import { colors, gStyle, images } from '../constants';
 import data from '../mockData/data';
 import { Data } from '../types/type';
@@ -11,49 +8,11 @@ import { Data } from '../types/type';
 interface ShowScrollerProps {
   dataset?: keyof Data;
   type?: 'rectangle' | 'round';
+  handlePress: (data: Data[keyof Data][0]) => void;
 }
-
-const ShowScroller: React.FC<ShowScrollerProps> = ({
-  dataset = 'dumbData',
-  type = 'rectangle',
-}) => {
-  const dataTypes: Data = data;
-  const dataArray = dataTypes[dataset];
-
-  return (
-    <FlatList
-      contentContainerStyle={gStyle.pHHalf}
-      data={dataArray}
-      horizontal
-      keyExtractor={({ id }) => id.toString()}
-      renderItem={({ item }) => {
-        let renderItem: React.ReactNode = <StyledView type={type} />;
-
-        if (item.image) {
-          renderItem = (
-            <StyledImage
-              source={images[item.image] as ImageStyle}
-              type={type}
-            />
-          );
-        }
-
-        return renderItem;
-      }}
-      showsHorizontalScrollIndicator={false}
-    />
-  );
-};
-
-ShowScroller.defaultProps = {
-  dataset: 'dumbData',
-  type: 'rectangle',
-};
-
-ShowScroller.propTypes = {
-  dataset: PropTypes.oneOf(['dumbData', 'myList', 'previews']),
-  type: PropTypes.oneOf(['rectangle', 'round']),
-};
+const StyledTouchableOpacity = styled(TouchableOpacity)`
+  margin-right: 10px;
+`;
 
 interface StyledViewProps {
   type: 'rectangle' | 'round';
@@ -77,5 +36,42 @@ const StyledImage = styled(Image)<StyledImageProps>`
   resize-mode: contain;
   width: ${({ type }) => (type === 'rectangle' ? 91 : 96)}px;
 ` as React.ComponentType<StyledImageProps & ImageStyle>;
+
+const ShowScroller: React.FC<ShowScrollerProps> = ({
+  dataset = 'dumbData',
+  type = 'rectangle',
+  handlePress
+}) => {
+  const dataTypes = data;
+  const dataArray = dataTypes[dataset];
+
+  return (
+    <FlatList
+      contentContainerStyle={gStyle.pHHalf}
+      data={dataArray}
+      horizontal
+      keyExtractor={({ id }) => id.toString()}
+      renderItem={({ item }) => {
+
+        let renderItem: React.ReactNode = <StyledView type={type} />;
+
+        if (item.image) {
+          renderItem = (
+            <StyledTouchableOpacity onPress={() => handlePress(item)}>
+              <StyledImage
+                source={images[item.image] as ImageStyle}
+                type={type}
+              />
+            </StyledTouchableOpacity>
+          );
+        }
+        return renderItem;
+      }}
+      showsHorizontalScrollIndicator={false}
+    />
+  );
+};
+
+
 
 export default ShowScroller;

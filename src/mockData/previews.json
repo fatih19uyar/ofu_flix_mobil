@@ -1,32 +1,38 @@
 [
-    {
-      "id": 1,
-      "image": "americanGangster",
-      "title": "American Gangster"
-    },
-    {
-      "id": 2,
-      "image": "breakingBad",
-      "title": "Breaking Bad"
-    },
-    {
-      "id": 3,
-      "image": "starwarsJedi",
-      "title": "Star Wars: The Last Jedi"
-    },
-    {
-      "id": 4,
-      "image": "guardians2",
-      "title": "Guardians of the Galaxy, Vol.2"
-    },
-    {
-      "id": 5,
-      "image": "darkKnight",
-      "title": "The Dark Knight"
-    },
-    {
-      "id": 6,
-      "image": "blackPanther",
-      "title": "Black Panther"
-    }
-  ]
+  {
+    "id": 1,
+    "image": "americanGangster",
+    "title": "American Gangster",
+    "desc": "A powerful crime drama set in the 1970s, depicting the rise of a drug lord."
+  },
+  {
+    "id": 2,
+    "image": "breakingBad",
+    "title": "Breaking Bad",
+    "desc": "A high school chemistry teacher turned methamphetamine producer navigates the criminal underworld."
+  },
+  {
+    "id": 3,
+    "image": "starwarsJedi",
+    "title": "Star Wars: The Last Jedi",
+    "desc": "The saga continues as the Resistance fights against the First Order in a galaxy far, far away."
+  },
+  {
+    "id": 4,
+    "image": "guardians2",
+    "title": "Guardians of the Galaxy, Vol.2",
+    "desc": "The misfit crew of Guardians embarks on another adventure to unravel the mysteries of Peter Quill's parentage."
+  },
+  {
+    "id": 5,
+    "image": "darkKnight",
+    "title": "The Dark Knight",
+    "desc": "Batman faces off against the Joker, a criminal mastermind who seeks to create chaos in Gotham City."
+  },
+  {
+    "id": 6,
+    "image": "blackPanther",
+    "title": "Black Panther",
+    "desc": "T'Challa, the Black Panther, returns to the fictional African nation of Wakanda to take the throne after his father's death."
+  }
+]

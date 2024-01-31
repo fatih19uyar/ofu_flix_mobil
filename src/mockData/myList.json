@@ -1,27 +1,32 @@
 [
-    {
-      "id": 1,
-      "image": "peakyBlinders",
-      "title": "Peaky Blinders"
-    },
-    {
-      "id": 2,
-      "image": "goodWillHunting",
-      "title": "Good Will Hunting"
-    },
-    {
-      "id": 3,
-      "image": "johnMulaneyKG",
-      "title": "John Mulaney Kid Gorgeous at Radio City"
-    },
-    {
-      "id": 5,
-      "image": "goodWillHunting",
-      "title": "Good Will Hunting"
-    },
-    {
-      "id": 6,
-      "image": "johnMulaneyKG",
-      "title": "John Mulaney Kid Gorgeous at Radio City"
-    }
-  ]
+  {
+    "id": 1,
+    "image": "peakyBlinders",
+    "title": "Peaky Blinders",
+    "desc": "A gangster family epic set in Birmingham, England."
+  },
+  {
+    "id": 2,
+    "image": "goodWillHunting",
+    "title": "Good Will Hunting",
+    "desc": "A janitor at MIT has a gift for mathematics."
+  },
+  {
+    "id": 3,
+    "image": "johnMulaneyKG",
+    "title": "John Mulaney Kid Gorgeous at Radio City",
+    "desc": "John Mulaney's comedy special recorded at Radio City Music Hall."
+  },
+  {
+    "id": 5,
+    "image": "goodWillHunting",
+    "title": "Good Will Hunting",
+    "desc": "A janitor at MIT has a gift for mathematics."
+  },
+  {
+    "id": 6,
+    "image": "johnMulaneyKG",
+    "title": "John Mulaney Kid Gorgeous at Radio City",
+    "desc": "John Mulaney's comedy special recorded at Radio City Music Hall."
+  }
+]
