@@ -16,6 +16,7 @@ import { useAppDispatch } from '../../common/hooks/useStore';
 import { logout } from '../../store/login/loginSlice';
 import { setLoading } from '../../store/common/commonSlice';
 import { initialRouteNameSet } from '../../store/navigation/navigationSlice';
+import { deleteMyList } from '../../store/content/contentSlice';
 
 const privacyUrl = 'https://help.netflix.com/legal/privacy?headless=true';
 
@@ -50,7 +51,8 @@ const More: React.FC<MoreProps> = () => {
   };
   const logOutFunc = async () => {
     dispatch(setLoading(true));
-    dispatch(logout())
+    dispatch(logout());
+    dispatch(deleteMyList());
     await clearAllLocalStorage();
     setTimeout(()=>{
       dispatch(initialRouteNameSet({initialRouteName: "StackAuth"}))
