@@ -1,6 +1,6 @@
 export interface mockDataType {
     id: number;
+    title: string;
     image: string;
-    title?: string,
-    desc?: string
+    desc?: string;
   }
