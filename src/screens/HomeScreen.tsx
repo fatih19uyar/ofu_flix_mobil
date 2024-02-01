@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ScrollView, Text, View } from 'react-native';
+import { NativeScrollEvent, NativeSyntheticEvent, ScrollView, Text, View } from 'react-native';
 import { useScrollToTop } from '@react-navigation/native';
 import { gStyle } from '../constants';
 
@@ -8,34 +8,33 @@ import Cast from '../components/Cast';
 import ShowScroller from '../components/ShowScroller';
 import HeaderHome from '../components/Header/HeaderHome';
 import PromotionBanner from '../components/Promotion/PromotionBanner';
-import { Data } from '../types/type';
 import ShowDetailsModal from '../components/ShowDetailsModal';
 import useToastMessage from '../common/hooks/useToastMessage';
 import { StatusEnum } from '../utils/colorUtil';
+import { mockDataType } from '../mockData/type';
 
 const Home: React.FC = () => {
   const {showToast} = useToastMessage();
   // on active tab press, scroll to top
   const ref = React.useRef(null);
   useScrollToTop(ref);
-
   // local state
   const [showHeader, setShowHeader] = React.useState(true);
   const [offset, setOffset] = React.useState(0);
   const [modalVisible, setModalVisible] = React.useState(false);
-  const [selectedItem, setSelectedItem] = React.useState<Data[keyof Data][0] | null>(null);
+  const [selectedItem, setSelectedItem] = React.useState<mockDataType | null>(null);
 
   const closeModal = () => {
     setModalVisible(false);
     setSelectedItem(null);
   };
 
-  const openModal = (data: Data[keyof Data][0]) => {
+  const openModal = (data: mockDataType) => {
     setSelectedItem(data);
     setModalVisible(true);
   };
 
-  const onScroll = (event: any) => {
+  const onScroll = (event:  NativeSyntheticEvent<NativeScrollEvent>) => {
     let show = showHeader;
     const currentOffset = event.nativeEvent.contentOffset.y;
     show = currentOffset < offset;

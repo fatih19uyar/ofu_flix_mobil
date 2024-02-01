@@ -2,13 +2,14 @@ import React from 'react';
 import { FlatList, Image, ViewStyle, ImageStyle, TouchableOpacity } from 'react-native';
 import styled from 'styled-components/native';
 import { colors, gStyle, images } from '../constants';
-import data from '../mockData/data';
 import { Data } from '../types/type';
+import { useAppSelector } from '../common/hooks/useStore';
+import { mockDataType } from '../mockData/type';
 
 interface ShowScrollerProps {
-  dataset?: keyof Data;
+  dataset: keyof Data;
   type?: 'rectangle' | 'round';
-  handlePress: (data: Data[keyof Data][0]) => void;
+  handlePress: (selectedItem: mockDataType) => void;
 }
 const StyledTouchableOpacity = styled(TouchableOpacity)`
   margin-right: 10px;
@@ -38,13 +39,21 @@ const StyledImage = styled(Image)<StyledImageProps>`
 ` as React.ComponentType<StyledImageProps & ImageStyle>;
 
 const ShowScroller: React.FC<ShowScrollerProps> = ({
-  dataset = 'dumbData',
+  dataset = 'dumpData',
   type = 'rectangle',
   handlePress
 }) => {
-  const dataTypes = data;
-  const dataArray = dataTypes[dataset];
-
+  const dataArray = useAppSelector(state => {
+    switch (dataset) {
+      case 'myList':
+        return state.content.myList;
+      case 'previews':
+        return state.content.previews;
+      case 'dumpData':
+      default:
+        return state.content.dumpData;
+    }
+  });
   return (
     <FlatList
       contentContainerStyle={gStyle.pHHalf}

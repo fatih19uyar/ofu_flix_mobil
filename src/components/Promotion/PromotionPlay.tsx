@@ -40,10 +40,4 @@ const PromotionPlay: React.FC<PromotionPlayProps> = ({ icon = <SvgPlay />, onPre
   );
 };
 
-PromotionPlay.propTypes = {
-  onPress: PropTypes.func.isRequired,
-  icon: PropTypes.element,
-  text: PropTypes.string,
-};
-
 export default PromotionPlay;

@@ -1,23 +1,19 @@
-import { configureStore } from '@reduxjs/toolkit';
-import loginSlice from './login/loginSlice';
-import commonSlice from './common/commonSlice';
-import navigationSlice from './navigation/navigationSlice';
-
+import { Action, configureStore, Middleware, Store } from '@reduxjs/toolkit';
+import contentMiddleware from './middlewares/contentMiddleware';
+import rootReducer from './rootReducer';
 
 export const store = configureStore({
-  reducer: {
-    common: commonSlice,
-    auth: loginSlice,
-    navigation: navigationSlice
-  },
+  reducer: rootReducer,
   devTools: process.env.NODE_ENV !== 'production',
-  preloadedState: {},
-  middleware(getDefaultMiddleware) {
-    return getDefaultMiddleware({
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
       serializableCheck: false,
-    });
-  },
+    }).prepend(
+      contentMiddleware as Middleware<
+      (action: Action<'specialAction'>) => number,
+      RootState
+    >,),
 });
 
-export type RootState = ReturnType<typeof store.getState>;
+export type RootState = ReturnType<typeof rootReducer>
 export type AppDispatch = typeof store.dispatch;

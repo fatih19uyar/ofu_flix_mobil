@@ -1,8 +1,9 @@
 import React from 'react';
-import {ScrollView, Image, Text, ImageStyle, View} from 'react-native';
+import {ScrollView, Image, ImageStyle, NativeSyntheticEvent, NativeScrollEvent} from 'react-native';
 import styled from 'styled-components/native';
 import {colors, fonts, images} from '../constants';
 import {useScrollToTop} from '@react-navigation/native';
+import { mockDataType } from '../mockData/type';
 
 const SearchResultItem = styled.View`
   flex-direction: row;
@@ -37,7 +38,7 @@ const SearchResultText = styled.Text<SearchResultTextProps>`
   color: ${colors.white};
   font-family: ${({style}) =>
     style === 'title' ? fonts.bold : style === 'date' ? fonts.light : fonts.medium};
-  font-size: ${({style}) => (style === 'date' ? '14px' : '16px')};
+  font-size: ${({style}) => (style === 'date' ? '14px' : style === 'title' ? '16px' : '12px')};
   text-align: center;
   width: 300px;
 `;
@@ -58,7 +59,7 @@ const EmptyView = styled.View`
 `;
 
 interface SearchScrollViewProps {
-  dataList: Array<{id: number; title: string; image: string}> | [];
+  dataList: Array<mockDataType> | [];
 }
 
 const SearchScrollView: React.FC<SearchScrollViewProps> = ({dataList}) => {
@@ -71,7 +72,7 @@ const SearchScrollView: React.FC<SearchScrollViewProps> = ({dataList}) => {
   const ref = React.useRef(null);
   useScrollToTop(ref);
 
-  const onScroll = (event: any) => {
+  const onScroll = (event : NativeSyntheticEvent<NativeScrollEvent>) => {
     let show = showHeader;
     const currentOffset = event.nativeEvent.contentOffset.y;
     show = currentOffset < offset;
@@ -83,6 +84,7 @@ const SearchScrollView: React.FC<SearchScrollViewProps> = ({dataList}) => {
   };
   
   return dataList.length > 0 ? (
+    <>
     <ScrollView
       ref={ref}
       bounces
@@ -94,12 +96,14 @@ const SearchScrollView: React.FC<SearchScrollViewProps> = ({dataList}) => {
           <StyledImage source={images[item.image] as ImageStyle} />
           <TitleContainer>
             <SearchResultText style="title">{item.title}</SearchResultText>
-            <SearchResultText style="desc">desc</SearchResultText>
+            <SearchResultText style="desc">{item.desc}</SearchResultText>
             <SearchResultText style="date">{formattedDate}</SearchResultText>
           </TitleContainer>
         </SearchResultItem>
       ))}
     </ScrollView>
+    
+    </>
   ) : (
     <EmptyView>
       <EmptyDescription>No found...</EmptyDescription>
