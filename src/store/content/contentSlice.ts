@@ -1,6 +1,6 @@
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {AsyncThunkConfig, ContentItem, ContentState} from './type';
-import { setLocalStorage } from '../../common/hooks/useLocalStorage';
+import { getLocalStorageItem, setLocalStorage, updateLocalStorageByKey } from '../../common/hooks/useLocalStorage';
 import data from '../../mockData/data';
 
 const initialState: ContentState = {
@@ -15,6 +15,21 @@ export const setMyListAsync = createAsyncThunk(
   async (myList: ContentItem[]) => {
     await setLocalStorage('myList', JSON.stringify(myList));
     return myList;
+  },
+);
+
+export const addToMyListAsync = createAsyncThunk(
+  'content/addToMyListAsync',
+  async (item: ContentItem) => {
+    await updateLocalStorageByKey('myList', item, 'add');
+    return item;
+  },
+);
+export const removeToMyListAsync = createAsyncThunk(
+  'content/removeToMyListAsync',
+  async (item: ContentItem) => {
+    await updateLocalStorageByKey('myList', item, 'remove');
+    return item;
   },
 );
 
@@ -38,15 +53,35 @@ export const initialize = createAsyncThunk<void, void, AsyncThunkConfig>(
     'content/initialize',
     async (_, thunkAPI) => {
       const { content } = thunkAPI.getState();
-  
       if (content.myList.length === 0) {
-        await thunkAPI.dispatch(setMyListAsync(data['myList']));
+        const myListFromLocalStorage = await getLocalStorageItem('myList');
+        if (
+          myListFromLocalStorage && JSON.parse(myListFromLocalStorage).length > 0
+        ) {
+          await thunkAPI.dispatch(setMyListAsync(JSON.parse(myListFromLocalStorage)));
+        } else {
+          await thunkAPI.dispatch(setMyListAsync(data['myList']));
+        }
       }
       if (content.dumpData.length === 0) {
-        await thunkAPI.dispatch(setDumpDataListAsync(data['dumbData']));
+        const dumpDataFromLocalStorage = await getLocalStorageItem('dumpData');
+        if (
+          dumpDataFromLocalStorage && JSON.parse(dumpDataFromLocalStorage).length > 0
+        ) {
+          await thunkAPI.dispatch(setDumpDataListAsync(JSON.parse(dumpDataFromLocalStorage)));
+        } else {
+          await thunkAPI.dispatch(setDumpDataListAsync(data['dumbData']));
+        }
       }
       if (content.previews.length === 0) {
-        await thunkAPI.dispatch(setPreviewsListAsync(data['previews']));
+        const previewsFromLocalStorage = await getLocalStorageItem('previewsList');
+        if (
+            previewsFromLocalStorage && JSON.parse(previewsFromLocalStorage).length > 0
+          ) {
+            await thunkAPI.dispatch(setPreviewsListAsync(JSON.parse(previewsFromLocalStorage)));
+          } else {
+            await thunkAPI.dispatch(setPreviewsListAsync(data['previews']));
+          }
       }
     },
   );
@@ -59,6 +94,12 @@ const contentSlice = createSlice({
       .addCase(setMyListAsync.fulfilled, (state, action) => {
         state.myList = action.payload;
       })
+      .addCase(addToMyListAsync.fulfilled, (state, action) => {
+        state.myList.push(action.payload);
+      })
+      .addCase(removeToMyListAsync.fulfilled, (state, action) => {
+        state.myList = state.myList.filter(item => item.id !== action.payload.id);
+      })
       .addCase(setPreviewsListAsync.fulfilled, (state, action) => {
         state.previews = action.payload;
       })
@@ -67,20 +108,6 @@ const contentSlice = createSlice({
       });
   },
   reducers: {
-    addToMyList: (state, action: PayloadAction<ContentItem>) => {
-      state.myList.push(action.payload);
-    },
-    removeFromMyList: (state, action: PayloadAction<number>) => {
-      state.myList = state.myList.filter(item => item.id !== action.payload);
-    },
-    updateMyListItem: (state, action: PayloadAction<ContentItem>) => {
-      const index = state.myList.findIndex(
-        item => item.id === action.payload.id,
-      );
-      if (index !== -1) {
-        state.myList[index] = action.payload;
-      }
-    },
     addToPreviews: (state, action: PayloadAction<ContentItem>) => {
       state.previews.push(action.payload);
     },
@@ -112,9 +139,6 @@ const contentSlice = createSlice({
 });
 
 export const {
-  addToMyList,
-  removeFromMyList,
-  updateMyListItem,
   addToPreviews,
   addToDumpData,
   setSelectedContent,
