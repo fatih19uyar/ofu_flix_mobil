@@ -51,7 +51,7 @@ const Home: React.FC = () => {
   };
   const handleWatchNow = (id: string) => {
     console.log(id);
-    showToast(StatusEnum.SUCCESS, 'Incomming soon...');
+    showToast({type:'success', text1: 'Incomming soon...'});
     closeModal();
   };
   

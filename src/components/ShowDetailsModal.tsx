@@ -11,6 +11,7 @@ import { useAppDispatch, useAppSelector } from '../common/hooks/useStore';
 import {  addToMyListAsync, removeToMyListAsync } from '../store/content/contentSlice';
 import useToastMessage from '../common/hooks/useToastMessage';
 import { ContentItem } from '../store/content/type';
+import { Image } from 'react-native';
 
 interface ShowDetailsModalProps {
   isVisible: boolean;
@@ -79,10 +80,10 @@ const StyledPromotionView = styled.View`
   justify-content: space-between;
   flex-direction: row;
 `;
-const StyledImage = styled.Image`
+const StyledImage = styled(Image)<StyledImageProps>`
   width: 91px;
   height: 131px;
-` as React.ComponentType<StyledImageProps & ImageStyle>;
+`;
 
 const ShowDetailsModal: React.FC<ShowDetailsModalProps> = ({
   isVisible,

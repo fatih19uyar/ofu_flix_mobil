@@ -49,7 +49,7 @@ axiosInstance.interceptors.response.use(
       store.dispatch(logoutAction());
       await clearAllLocalStorage(); 
       cancelToken.cancel('Operation canceled by the user.');
-      showToast(StatusEnum.ERROR, 'Error', 'Authentication failed');
+      showToast({type:'error',text1: 'Authentication failed'});
     } else if (
       error.response?.status === 401 &&
       refreshTokenReload &&
@@ -69,14 +69,13 @@ axiosInstance.interceptors.response.use(
         return await axiosInstance(originalRequest);
       } catch (reason) {
         const err = reason as AxiosError<ErrorResponse>;
-
-        showToast(StatusEnum.INFO, 'Warning', err.response?.data.message.message ?? 'An error occurred');
+        showToast({type:'info',text1: 'Warning', text2: err.response?.data.message.message ?? 'An error occurred'});
       }
     } else if (error.response?.status === 408) {
       cancelToken.cancel('Operation canceled by the user.');
       const err = error as AxiosError<ErrorResponse>;
-
-      showToast(StatusEnum.ERROR, 'Error', err.response?.data?.message?.message);
+      
+      showToast({type:'error',text1: 'Error', text2: err.response?.data?.message?.message});
       await sleep(1000);
       store.dispatch(logoutAction());
 
@@ -84,7 +83,7 @@ axiosInstance.interceptors.response.use(
     } else if ((error.response?.data as ErrorResponse).status === 500) {
       cancelToken.cancel('Server could not be reached');
       await clearAllLocalStorage(); 
-      showToast(StatusEnum.ERROR, 'Error', 'Server error occurred'); 
+      showToast({type:'error',text1: 'Error', text2: 'Server error occurred'});
       return Promise.reject(error);
     }
 

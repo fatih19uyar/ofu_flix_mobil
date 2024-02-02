@@ -66,13 +66,13 @@ const LoginScreen: React.FC = () => {
         },1500);
       } else {
         setTimeout(()=>{
-          showToast(StatusEnum.ERROR, 'Invalid username or password');
+          showToast({type: 'error', text1: 'Invalid username or password'});
           dispatch(setLoading(false));
         },1500); 
       }
     } catch (error) {
       console.error('Login error:', error);
-      showToast(StatusEnum.ERROR, 'An error occurred during login');
+      showToast({type: 'error', text1: 'An error occurred during login'});
       dispatch(setLoading(false));
     }
   };
