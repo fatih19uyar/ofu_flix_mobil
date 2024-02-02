@@ -1,19 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {ImageStyle, Modal, TouchableOpacity, View} from 'react-native';
 import styled from 'styled-components/native';
-import {gStyle, colors, images, fonts} from '../constants';
-import {Data} from '../types/type';
-import CommonButton from './CommonButton';
+import {colors, images, fonts} from '../constants';
 import PromotionPlay from './Promotion/PromotionPlay';
 import SvgCross from '../assets/icons/Svg.Cross';
 import TouchTextIcon from './Touch/TouchTextIcon';
 import SvgCheck from '../assets/icons/Svg.Check';
 import SvgPlus from '../assets/icons/Svg.Plus';
-import { mockDataType } from '../mockData/type';
+import { useAppDispatch, useAppSelector } from '../common/hooks/useStore';
+import {  addToMyListAsync, removeToMyListAsync } from '../store/content/contentSlice';
+import useToastMessage from '../common/hooks/useToastMessage';
+import { ContentItem } from '../store/content/type';
 
 interface ShowDetailsModalProps {
   isVisible: boolean;
-  data: mockDataType | null;
+  data: ContentItem | null;
   onClose: () => void;
   handleWatchNow: (id: string) => void;
 }
@@ -89,12 +90,35 @@ const ShowDetailsModal: React.FC<ShowDetailsModalProps> = ({
   onClose,
   handleWatchNow,
 }) => {
+    const dispatch = useAppDispatch();
+    const myList = useAppSelector(state => state.content.myList);
+    const {showToast} = useToastMessage();
     const [added, setAdded] = useState(false);
-    const icon = added ? <SvgCheck size={12}/> : <SvgPlus size={12}/>;
+    const icon = added ? <SvgCheck size={12} /> : <SvgPlus size={12} />;
 
-  if (!data) {
-    return null;
-  }
+    useEffect(() => {
+      setAdded(false);
+    }, [onClose]);
+    
+    useEffect(() => {
+      if (myList.some(existingItem => existingItem.id === data?.id)) {
+        setAdded(true);
+      }
+    }, [data])
+
+    if (!data) {
+      return null;
+    }
+    const handleAdd = async () => {
+      if (added) {
+        await dispatch(removeToMyListAsync(data));
+        setAdded(false);
+      }
+      if (!myList.some(existingItem => existingItem.id === data.id)) {
+        await dispatch(addToMyListAsync(data));
+        setAdded(true);
+      }
+    };
 
   return (
     <StyledModal
@@ -121,7 +145,7 @@ const ShowDetailsModal: React.FC<ShowDetailsModalProps> = ({
           <PromotionPlay  onPress={() => handleWatchNow(data.id.toString())} />
           <TouchTextIcon
             icon={icon}
-            onPress={() => setAdded(!added)}
+            onPress={() => handleAdd()}
             text="My List"
           />
           </StyledPromotionView>

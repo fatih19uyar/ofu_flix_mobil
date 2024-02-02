@@ -59,7 +59,7 @@ const ShowScroller: React.FC<ShowScrollerProps> = ({
       contentContainerStyle={gStyle.pHHalf}
       data={dataArray}
       horizontal
-      keyExtractor={({ id }) => id.toString()}
+      keyExtractor={({ id }) => (id ? id.toString() : Math.random().toString())}
       renderItem={({ item }) => {
 
         let renderItem: React.ReactNode = <StyledView type={type} />;

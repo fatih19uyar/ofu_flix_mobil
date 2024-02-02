@@ -10,8 +10,9 @@ import HeaderHome from '../components/Header/HeaderHome';
 import PromotionBanner from '../components/Promotion/PromotionBanner';
 import ShowDetailsModal from '../components/ShowDetailsModal';
 import useToastMessage from '../common/hooks/useToastMessage';
+
 import { StatusEnum } from '../utils/colorUtil';
-import { mockDataType } from '../mockData/type';
+import { ContentItem } from '../store/content/type';
 
 const Home: React.FC = () => {
   const {showToast} = useToastMessage();
@@ -22,14 +23,14 @@ const Home: React.FC = () => {
   const [showHeader, setShowHeader] = React.useState(true);
   const [offset, setOffset] = React.useState(0);
   const [modalVisible, setModalVisible] = React.useState(false);
-  const [selectedItem, setSelectedItem] = React.useState<mockDataType | null>(null);
+  const [selectedItem, setSelectedItem] = React.useState<ContentItem | null>(null);
 
   const closeModal = () => {
     setModalVisible(false);
     setSelectedItem(null);
   };
 
-  const openModal = (data: mockDataType) => {
+  const openModal = (data: ContentItem) => {
     setSelectedItem(data);
     setModalVisible(true);
   };
@@ -67,16 +68,16 @@ const Home: React.FC = () => {
         <PromotionBanner />
 
         <Text style={gStyle.heading}>Previews</Text>
-        <ShowScroller dataset="previews"  handlePress={openModal} />
+        <ShowScroller dataset="previews" handlePress={openModal} />
 
         <Text style={gStyle.heading}>My List</Text>
         <ShowScroller dataset="myList" handlePress={openModal} />
 
         <Text style={gStyle.heading}>Popular on Netflix</Text>
-        <ShowScroller dataset='dumbData' handlePress={openModal} />
+        <ShowScroller dataset="dumbData" handlePress={openModal} />
 
         <Text style={gStyle.heading}>Trending Now</Text>
-        <ShowScroller dataset='previews' handlePress={openModal} />
+        <ShowScroller dataset="previews" handlePress={openModal} />
 
         <View style={gStyle.spacer3} />
       </ScrollView>

@@ -1,6 +1,7 @@
 import { Action, configureStore, Middleware, Store } from '@reduxjs/toolkit';
-import contentMiddleware from './middlewares/contentMiddleware';
 import rootReducer from './rootReducer';
+import updateAsyncStorageMiddleware from './middlewares/updateAsyncStorageMiddleware';
+import { contentMiddleware } from './middlewares/contentMiddleware';
 
 export const store = configureStore({
   reducer: rootReducer,
@@ -10,6 +11,11 @@ export const store = configureStore({
       serializableCheck: false,
     }).prepend(
       contentMiddleware as Middleware<
+      (action: Action<'specialAction'>) => number,
+      RootState
+    >,)
+    .prepend(
+      updateAsyncStorageMiddleware as Middleware<
       (action: Action<'specialAction'>) => number,
       RootState
     >,),
