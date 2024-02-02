@@ -1,5 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { device } from '../../constants';
+import { ContentItem } from '../../store/content/type';
 
 export const clearAllLocalStorage = async () => {
   try {
@@ -34,3 +35,25 @@ export const removeLocalStorageByKey = async (key: string) => {
     console.error('Error clearing ' + key + ' data from AsyncStorage:', error);
   }
 };
+export const updateLocalStorageByKey = async (key: string, newItem: ContentItem, process: 'add'|'remove') => {
+  try {
+    const existingData = await AsyncStorage.getItem(key);
+    if (process === 'add')
+    if (existingData) {
+      const existingArray = JSON.parse(existingData);
+      existingArray.push(newItem);
+      await AsyncStorage.setItem(key, JSON.stringify(existingArray));
+    } else {
+      const newArray = [newItem];
+      await AsyncStorage.setItem(key, JSON.stringify(newArray));
+    }
+    else if (process === 'remove'){
+      if (!existingData) return;
+      const existingArray: ContentItem[] = JSON.parse(existingData);
+      const newArray = existingArray.filter(item => item.id !== newItem.id);
+      await AsyncStorage.setItem(key, JSON.stringify(newArray));
+    }
+  } catch (error) {
+    console.error('Error updating ' + key + ' data in AsyncStorage:', error);
+  }
+}
