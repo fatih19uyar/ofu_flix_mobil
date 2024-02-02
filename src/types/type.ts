@@ -24,14 +24,14 @@ export type RootStackParamList = {
 };
 
 export interface Show {
-  id: number;
+  id: string;
   title: string;
   image: string;
   desc: string;
 }
 
 export interface Data {
-  dumbData: (Show | {id: number; title: string; image?: undefined, desc?: string})[];
-  myList: (Show | {id: number; title: string; image?: undefined, desc?: string})[];
-  previews: (Show | {id: number; title: string; image?: undefined, desc?: string})[];
+  dumbData: (Show | {id: string; title: string; image?: undefined, desc?: string})[];
+  myList: (Show | {id: string; title: string; image?: undefined, desc?: string})[];
+  previews: (Show | {id: string; title: string; image?: undefined, desc?: string})[];
 }

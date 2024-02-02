@@ -1,7 +1,7 @@
 import {RootState} from '..';
 
 export interface ContentItem {
-  id: number;
+  id: string;
   title: string;
   image: string;
   desc?: string;
