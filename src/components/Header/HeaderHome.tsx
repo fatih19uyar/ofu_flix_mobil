@@ -77,11 +77,6 @@ const HeaderHome: React.FC<HeaderHomeProps> = ({show, all = true}) => {
         {all && (
           <>
             <TouchText
-              onPress={() => navigation.navigate('TvShows')}
-              text="TV Shows"
-              textStyle={styles.text}
-            />
-            <TouchText
               onPress={() => navigation.navigate('Movies')}
               text="Movies"
               textStyle={styles.text}

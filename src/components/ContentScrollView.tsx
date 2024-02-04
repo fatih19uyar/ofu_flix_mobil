@@ -18,6 +18,7 @@ const SearchResultItem = styled.View`
   padding: 4px;
   border-bottom-color: ${colors.black40};
 `;
+
 interface StyledImageProps {
   source: ImageStyle;
 }
@@ -100,7 +101,7 @@ const ContentScrollView: React.FC<ContentScrollViewProps> = ({dataList}) => {
   const onClick = (data: ContentItem) => {
     dispatch(setSelectedContent(data));
   };
-  const onClicked = (data: ContentItem) => {
+  const onPlayClick = (data: ContentItem) => {
       console.log(data)
   }
   
@@ -124,7 +125,7 @@ const ContentScrollView: React.FC<ContentScrollViewProps> = ({dataList}) => {
             <StarRating rateStatus={item.rate ?? 1}/>
           </TitleContainer>
           <IconContainer>
-            <PromotionPlay textSize={10}  iconSize={15} onPress={()=>{onClicked(item)}}/>
+            <PromotionPlay textSize={10}  iconSize={15} onPress={()=>{onPlayClick(item)}}/>
           </IconContainer>
         </SearchResultItem>
         </TouchableOpacity>
