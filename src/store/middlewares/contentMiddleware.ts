@@ -1,9 +1,7 @@
 import {Middleware} from 'redux';
 import {RootState} from '..';
+import { ActionTypes } from './type';
 
-enum ActionTypes {
-  INITIALIZED = 'content/initialized',
-}
 
 export const contentMiddleware: Middleware<{}, RootState> =
   store => next => (action: any) => {

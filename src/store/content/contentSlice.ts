@@ -98,7 +98,9 @@ const contentSlice = createSlice({
         state.myList.push(action.payload);
       })
       .addCase(removeToMyListAsync.fulfilled, (state, action) => {
-        state.myList = state.myList.filter(item => item.id !== action.payload.id);
+        state.myList = state.myList.filter(
+          item => item.id !== action.payload.id,
+        );
       })
       .addCase(setPreviewsListAsync.fulfilled, (state, action) => {
         state.previews = action.payload;
@@ -116,6 +118,9 @@ const contentSlice = createSlice({
     },
     setSelectedContent: (state, action: PayloadAction<ContentItem | null>) => {
       state.selectedContent = action.payload;
+    },
+    removeSelectedContent: state => {
+      state.selectedContent = null;
     },
     setMyList: (state, action: PayloadAction<ContentItem[]>) => {
       state.myList = action.payload;
@@ -142,6 +147,7 @@ export const {
   addToPreviews,
   addToDumpData,
   setSelectedContent,
+  removeSelectedContent,
   deleteMyList,
   deleteDumpData,
   deletePreviews,
