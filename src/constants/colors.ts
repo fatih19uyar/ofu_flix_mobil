@@ -42,5 +42,8 @@ export default {
     castConnectDeviceText: '#58b1e2',
 
     //showDetails 
-    detailsBg: 'rgba(164, 164, 164, 0.5)'
+    detailsBg: 'rgba(164, 164, 164, 0.5)',
+
+    // rate star
+    fillColor: '#ED8A19'
   };

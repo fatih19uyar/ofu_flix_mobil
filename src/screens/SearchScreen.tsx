@@ -8,6 +8,7 @@ import HeaderSearch from '../components/Header/HeaderSearch';
 import SearchScrollView from '../components/SearchScrollView';
 import {mockDataType} from '../mockData/type';
 import {useAppSelector} from '../common/hooks/useStore';
+import ShowDetailsModal from '../components/ShowDetailsModal';
 
 function Search() {
   const [search, setSearch] = React.useState('');
@@ -31,6 +32,7 @@ function Search() {
         <HeaderSearch setSearchText={setSearch} />
         <SearchScrollView dataList={searchedDataList} />
       </View>
+      <ShowDetailsModal />
       <Cast />
     </>
   );
