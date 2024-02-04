@@ -1,3 +1,5 @@
+import { ContentItem } from "../store/content/type";
+
 export type RootStackParamList = {
   DashBoard: {} | undefined;
   Login: {} | undefined;
@@ -21,6 +23,7 @@ export type RootStackParamList = {
   ResetPasswordScreen : {} | undefined;
   ProfileSelectionScreen : {} | undefined;
   AppNavigation: {} | undefined;
+  MediaShowCaseScreen: ContentItem ;
 };
 
 export interface Show {

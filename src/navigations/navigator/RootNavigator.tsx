@@ -11,6 +11,7 @@ import ModalWebView from '../../screens/ModalScreens/ModalWebView';
 import ModalVideo from '../../screens/ModalScreens/ModalVideo';
 import ModalManageProfiles from '../../screens/ModalScreens/ModalManageProfiles';
 import ModalCastConnectScreen from '../../screens/ModalScreens/ModalCastConnect';
+import MediaShowCaseScreen from '../../screens/MediaShowCaseScreen';
 
 import SplashScreen from '../../screens/SplashScreen';
 import StackAuth from '../stack/StackAuth';
@@ -19,6 +20,7 @@ import { initialRouteNameSet } from '../../store/navigation/navigationSlice';
 import { useTypedNavigation } from '../../common/hooks/useNavigation';
 import { StackActions } from '@react-navigation/native';
 import AppNavigation from './AppNavigation';
+
 
 const Stack = createStackNavigator();
 
@@ -63,6 +65,7 @@ const RootNavigator: React.FC = () => {
       <Stack.Screen name="ModalVideo" component={ModalVideo} />
       <Stack.Screen name="ModalWebView" component={ModalWebView} />
       <Stack.Screen name="ModalCastConnect" component={ModalCastConnectScreen} />
+      <Stack.Screen name="MediaShowCaseScreen" component={MediaShowCaseScreen} />
       <Stack.Screen name="AppNavigation" component={AppNavigation} />
       <Stack.Screen name="StackAuth" component={StackAuth} />
 
