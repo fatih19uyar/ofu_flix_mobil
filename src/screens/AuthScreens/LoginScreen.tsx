@@ -1,14 +1,14 @@
 import React from 'react';
 import {StatusBar, View} from 'react-native';
 import styled from 'styled-components/native';
-import CommonTextInput from '../../components/CommonTextInput';
+import CommonTextInput from '../../components/Common/CommonTextInput';
 import useToastMessage from '../../common/hooks/useToastMessage';
 import {StatusEnum} from '../../utils/colorUtil';
 import {useAppDispatch} from '../../common/hooks/useStore';
 import {setLoading} from '../../store/common/commonSlice';
 import { setUser} from '../../store/login/loginSlice';
 import {useTypedNavigation} from '../../common/hooks/useNavigation';
-import CommonButton from '../../components/CommonButton';
+import CommonButton from '../../components/Common/CommonButton';
 import data from '../../mockData/data';
 import {useForm, Controller} from 'react-hook-form';
 import * as yup from 'yup';

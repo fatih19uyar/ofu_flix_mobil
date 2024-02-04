@@ -5,12 +5,12 @@ import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-import CommonTextInput from '../../components/CommonTextInput';
+import CommonTextInput from '../../components/Common/CommonTextInput';
 import useToastMessage from '../../common/hooks/useToastMessage';
 import { StatusEnum } from '../../utils/colorUtil';
 import { useAppDispatch } from '../../common/hooks/useStore';
 import { setLoading } from '../../store/common/commonSlice';
-import CommonButton from '../../components/CommonButton';
+import CommonButton from '../../components/Common/CommonButton';
 import { useHeaderHeight } from '@react-navigation/elements';
 
 const Container = styled.View`

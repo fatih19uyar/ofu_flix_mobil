@@ -10,11 +10,11 @@ import {
   ViewProps,
 } from 'react-native';
 
-import {colors, fonts, gStyle} from '../constants';
-import SvgCross from '../assets/icons/Svg.Cross';
-import GradientInput from './ColorFullBorder';
-import SvgOpenEye from '../assets/icons/Svg.OpenEye';
-import SvgCloseEye from '../assets/icons/Svg.CloseEye';
+import {colors, fonts, gStyle} from '../../constants';
+import SvgCross from '../../assets/icons/Svg.Cross';
+import GradientInput from '../ColorFullBorder';
+import SvgOpenEye from '../../assets/icons/Svg.OpenEye';
+import SvgCloseEye from '../../assets/icons/Svg.CloseEye';
 
 interface SizeProps extends ViewProps {
   width?: number;

@@ -2,7 +2,7 @@ import React, {useState, useRef} from 'react';
 import styled from 'styled-components/native';
 import {Animated, Easing, TouchableOpacity} from 'react-native';
 
-import {colors, fonts, gStyle} from '../constants';
+import {colors, fonts, gStyle} from '../../constants';
 
 interface SizeProps {
   width?: number;

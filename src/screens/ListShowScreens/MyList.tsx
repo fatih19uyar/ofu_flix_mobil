@@ -5,8 +5,8 @@ import { gStyle } from '../../constants';
 // components
 import HeaderHome from '../../components/Header/HeaderHome';
 import Cast from '../../components/Cast';
-import ShowScrollerVertical from '../../components/ShowScrollerVertical';
 import { useAppSelector } from '../../common/hooks/useStore';
+import ContentScrollView from '../../components/ContentScrollView';
 
 const MyList: React.FC = () => {
     const myListArrray = useAppSelector(state => state.content.myList)
@@ -14,7 +14,7 @@ const MyList: React.FC = () => {
     <View style={gStyle.container}>
       <HeaderHome show />
       <View style={gStyle.spacer12} />
-        <ShowScrollerVertical dataList={myListArrray}/>
+        <ContentScrollView dataList={myListArrray}/>
       <View style={gStyle.pHHalf}>
       </View>
       <Cast />
