@@ -3,4 +3,5 @@ export interface mockDataType {
     title: string;
     image: string;
     desc?: string;
+    rate?: number;  
   }

@@ -5,6 +5,7 @@ export interface ContentItem {
   title: string;
   image: string;
   desc?: string;
+  rate?: number
 }
 export interface ContentState {
   myList: ContentItem[];
