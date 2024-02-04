@@ -5,10 +5,10 @@ import {gStyle} from '../constants';
 // components
 import Cast from '../components/Cast';
 import HeaderSearch from '../components/Header/HeaderSearch';
-import SearchScrollView from '../components/SearchScrollView';
 import {mockDataType} from '../mockData/type';
 import {useAppSelector} from '../common/hooks/useStore';
 import ShowDetailsModal from '../components/ShowDetailsModal';
+import ContentScrollView from '../components/ContentScrollView';
 
 function Search() {
   const [search, setSearch] = React.useState('');
@@ -25,12 +25,12 @@ function Search() {
     setSearchedDataList(filteredData);
     console.log(searchedDataList.length);
   }, [search]);
-
+  console.log("dddd", searchedDataList)
   return (
     <>
       <View style={gStyle.container}>
         <HeaderSearch setSearchText={setSearch} />
-        <SearchScrollView dataList={searchedDataList} />
+        <ContentScrollView dataList={searchedDataList} />
       </View>
       <ShowDetailsModal />
       <Cast />

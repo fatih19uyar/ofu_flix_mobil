@@ -7,11 +7,10 @@ const StarContainer = styled.View`
   padding: 3px;
 `;
 
-type StarRatingStatus = 1 | 2 | 3 | 4 | 5;
 
 interface StarRatingProps {
   size?: number;
-  rateStatus: StarRatingStatus;
+  rateStatus: number;
 }
 
 const StarRating: React.FC<StarRatingProps> = ({size = 24, rateStatus}) => {
@@ -22,7 +21,7 @@ const StarRating: React.FC<StarRatingProps> = ({size = 24, rateStatus}) => {
     setRating(selectedRating);
     setShowAllStars(!showAllStars);
   };
-  const renderStars = (rateStatusArray: number[]) => {
+  const renderStars = () => {
     const stars = [];
 
     for (let i = 1; i <= 5; i++) {
@@ -44,7 +43,7 @@ const StarRating: React.FC<StarRatingProps> = ({size = 24, rateStatus}) => {
         justifyContent: 'center',
         alignItems: 'center',
       }}>
-      {renderStars([rateStatus])}
+      {renderStars()}
     </View>
   );
 };

@@ -1,17 +1,14 @@
 import React from 'react';
-import {ScrollView, Image, ImageStyle, NativeSyntheticEvent, NativeScrollEvent, TouchableOpacity} from 'react-native';
+import {ScrollView, Image, ImageStyle, NativeSyntheticEvent, NativeScrollEvent, TouchableOpacity, View, Text} from 'react-native';
 import styled from 'styled-components/native';
 import {colors, fonts, images} from '../constants';
 import {useScrollToTop} from '@react-navigation/native';
 import { mockDataType } from '../mockData/type';
 import { ContentItem } from '../store/content/type';
 import { useAppDispatch } from '../common/hooks/useStore';
-import { set } from 'react-hook-form';
 import { setSelectedContent } from '../store/content/contentSlice';
-import { useTypedNavigation } from '../common/hooks/useNavigation';
-import { Path, Svg } from 'react-native-svg';
 import StarRating from './StarRating';
-import SvgStar from '../assets/icons/Svg.Star';
+import PromotionPlay from './Promotion/PromotionPlay';
 
 const SearchResultItem = styled.View`
   flex-direction: row;
@@ -43,7 +40,6 @@ interface SearchResultTextProps {
 }
 
 const SearchResultText = styled.Text<SearchResultTextProps>`
-  align-self: left;
   color: ${colors.white};
   font-family: ${({style}) =>
     style === 'title' ? fonts.bold : style === 'date' ? fonts.light : fonts.medium};
@@ -69,15 +65,17 @@ const EmptyView = styled.View`
 
 const IconContainer = styled.View`
   position: absolute;
-  top: 10px;
+  top: 35px;
   right: 10px;
-`;
+  width: 15%;
+  justify-content: center;
+  `;
 
-interface SearchScrollViewProps {
+interface ContentScrollViewProps {
   dataList: Array<mockDataType> | [];
 }
 
-const SearchScrollView: React.FC<SearchScrollViewProps> = ({dataList}) => {
+const ContentScrollView: React.FC<ContentScrollViewProps> = ({dataList}) => {
   const now = new Date();
   const formattedDate = `${now.getDate()}.${now.getMonth() + 1}.${now.getFullYear()}`;
   const dispatch = useAppDispatch();
@@ -102,6 +100,9 @@ const SearchScrollView: React.FC<SearchScrollViewProps> = ({dataList}) => {
   const onClick = (data: ContentItem) => {
     dispatch(setSelectedContent(data));
   };
+  const onClicked = (data: ContentItem) => {
+      console.log(data)
+  }
   
   return dataList.length > 0 ? (
 
@@ -120,8 +121,11 @@ const SearchScrollView: React.FC<SearchScrollViewProps> = ({dataList}) => {
             <SearchResultText style="title">{item.title}</SearchResultText>
             <SearchResultText style="desc">{item.desc}</SearchResultText>
             <SearchResultText style="date">{formattedDate}</SearchResultText>
-            <StarRating rateStatus={1}/>
+            <StarRating rateStatus={item.rate ?? 1}/>
           </TitleContainer>
+          <IconContainer>
+            <PromotionPlay textSize={10}  iconSize={15} onPress={()=>{onClicked(item)}}/>
+          </IconContainer>
         </SearchResultItem>
         </TouchableOpacity>
              </>
@@ -134,4 +138,4 @@ const SearchScrollView: React.FC<SearchScrollViewProps> = ({dataList}) => {
   );
 };
 
-export default SearchScrollView;
+export default ContentScrollView;

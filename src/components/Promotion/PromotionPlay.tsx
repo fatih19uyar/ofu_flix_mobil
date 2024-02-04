@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
-import { TouchableOpacity, View, Text } from 'react-native';
-import { colors, fonts, gStyle } from '../../constants';
+import {TouchableOpacity, View, Text} from 'react-native';
+import {colors, fonts, gStyle} from '../../constants';
 import SvgPlay from '../../assets/icons/Svg.Play';
+import {useTypedNavigation} from '../../common/hooks/useNavigation';
 
 const Container = styled(TouchableOpacity)`
   align-items: center;
@@ -15,10 +16,10 @@ const Container = styled(TouchableOpacity)`
   padding-vertical: 8px;
 `;
 
-const TextStyled = styled(Text)`
+const TextStyled = styled(Text)<{textSize: number}>`
   color: ${colors.black};
   font-family: ${fonts.medium};
-  font-size: 18px;
+  font-size: ${props => props.textSize}px;
 `;
 
 const IconContainer = styled(View)`
@@ -27,15 +28,31 @@ const IconContainer = styled(View)`
 
 interface PromotionPlayProps {
   icon?: React.ReactElement;
+  iconSize?: number;
   onPress: () => void;
   text?: string;
+  textSize?: number;
 }
 
-const PromotionPlay: React.FC<PromotionPlayProps> = ({ icon = <SvgPlay />, onPress, text = 'Play' }) => {
+const PromotionPlay: React.FC<PromotionPlayProps> = ({
+  icon = <SvgPlay />,
+  onPress,
+  text = 'Play',
+  textSize = 18,
+  iconSize = 24,
+}) => {
+  const navigation = useTypedNavigation();
+  const onClick = () => {
+    console.log('test');
+  };
+  const adjustedIcon = React.cloneElement(icon, { size: iconSize, fill: colors.black });
+
   return (
-    <Container activeOpacity={gStyle.activeOpacity} onPress={onPress}>
-      <IconContainer>{React.cloneElement(icon, { fill: colors.black })}</IconContainer>
-      <TextStyled>{text}</TextStyled>
+    <Container activeOpacity={gStyle.activeOpacity} onPress={onClick}>
+      <IconContainer>
+        {adjustedIcon}
+      </IconContainer>
+      <TextStyled textSize={textSize}>{text}</TextStyled>
     </Container>
   );
 };
