@@ -55,10 +55,10 @@ const RegisterScreen: React.FC = () => {
       // Burada kayıt işlemleri yapılacak, örneğin:
       // await dispatch(registerAction(data));
 
-      showToast(StatusEnum.SUCCESS, 'Registration successful!');
+      showToast({type:'success', text1:'Registration successful!'});
     } catch (error) {
       console.error('Registration error:', error);
-      showToast(StatusEnum.ERROR, 'An error occurred during registration');
+      showToast({type:'error', text1:'An error occurred during registration'});
       dispatch(setLoading(false));
     }
   };

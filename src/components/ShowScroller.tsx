@@ -36,7 +36,7 @@ const StyledImage = styled(Image)<StyledImageProps>`
   margin-right: 8px;
   resize-mode: contain;
   width: ${({ type }) => (type === 'rectangle' ? 91 : 96)}px;
-` as React.ComponentType<StyledImageProps & ImageStyle>;
+` ;
 
 const ShowScroller: React.FC<ShowScrollerProps> = ({
   dataset = 'dumpData',

@@ -18,14 +18,11 @@ function Search() {
   const mockData = useAppSelector(state => state.content.dumpData);
 
   useEffect(() => {
-    console.log(search);
     const filteredData = mockData.filter(item =>
       item.title.toLowerCase().includes(search.toLowerCase()),
     );
     setSearchedDataList(filteredData);
-    console.log(searchedDataList.length);
   }, [search]);
-  console.log("dddd", searchedDataList)
   return (
     <>
       <View style={gStyle.container}>

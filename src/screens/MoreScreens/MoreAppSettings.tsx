@@ -91,11 +91,11 @@ const AppSettings: React.FC = () => {
   const { showToast } = useToastMessage();
 
   const alertDeleteDownloads = () => {
-    showToast(
-      StatusEnum.INFO,
-      'Delete All Downloads',
-      'Are you sure you want to delete this one download?',
-    );
+    showToast({
+      type:'info',
+      text1: 'Delete All Downloads',
+      text2:'Are you sure you want to delete this one download?',
+    });
   };
 
   return (

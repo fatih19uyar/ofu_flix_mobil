@@ -14,7 +14,6 @@ import { useTypedNavigation } from '../common/hooks/useNavigation';
 
 const Home: React.FC = () => {
   // on active tab press, scroll to top
-  const navigation = useTypedNavigation();
   const ref = React.useRef(null);
   useScrollToTop(ref);
   // local state
