@@ -11,9 +11,10 @@ const StarContainer = styled.View`
 interface StarRatingProps {
   size?: number;
   rateStatus: number;
+  touchStatus?: boolean;
 }
 
-const StarRating: React.FC<StarRatingProps> = ({size = 24, rateStatus}) => {
+const StarRating: React.FC<StarRatingProps> = ({size = 24, rateStatus , touchStatus= true}) => {
   const [rating, setRating] = useState(0);
   const [showAllStars, setShowAllStars] = useState(false);
 
@@ -26,7 +27,7 @@ const StarRating: React.FC<StarRatingProps> = ({size = 24, rateStatus}) => {
 
     for (let i = 1; i <= 5; i++) {
       stars.push(
-        <TouchableOpacity key={i} onPress={() => handleRating(i)}>
+        <TouchableOpacity disabled={!touchStatus} key={i} onPress={() => handleRating(i)}>
           <StarContainer>
             <SvgStar size={size} hollow={i > rateStatus} />
           </StarContainer>
