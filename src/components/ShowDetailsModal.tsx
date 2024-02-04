@@ -99,24 +99,19 @@ const ShowDetailsModal: React.FC = ({}) => {
   };
 
   useEffect(() => {
-    if (selectedContent?.id) {
-      setIsVisible(true);
-    }
-    if (myList.some(existingItem => existingItem.id === selectedContent?.id)) {
-      setAdded(true);
-    }
-  }, [selectedContent]);
+    setIsVisible(Boolean(selectedContent?.id));
+    setAdded(myList.some(existingItem => existingItem.id === selectedContent?.id));
+  }, [selectedContent, myList]);
+  
 
 
   const handleAdd = async () => {
     if (added && selectedContent) {
       await dispatch(removeToMyListAsync(selectedContent));
-      setAdded(false);
-    }
-    if (!myList.some(existingItem => existingItem.id === selectedContent?.id) && selectedContent) {
+    } else if (!myList.some(existingItem => existingItem.id === selectedContent?.id) && selectedContent) {
       await dispatch(addToMyListAsync(selectedContent));
-      setAdded(true);
     }
+    setAdded(!added);
   };
 
   return (
