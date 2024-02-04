@@ -13,7 +13,7 @@ import SvgPlus from '../../assets/icons/Svg.Plus';
 import SvgInfo from '../../assets/icons/Svg.Info';
 import { useAppDispatch, useAppSelector } from '../../common/hooks/useStore';
 import { ContentItem } from '../../store/content/type';
-import { addToMyListAsync, removeToMyListAsync } from '../../store/content/contentSlice';
+import { addToMyListAsync, removeToMyListAsync, setSelectedContent } from '../../store/content/contentSlice';
 
 
 const BannerBackground = styled(ImageBackground)`
@@ -35,28 +35,26 @@ const LogoImage = styled(Image)`
   width: 291px;
 `;
 interface PromotionBannerProps {
-  onPressInfo : (data:ContentItem | undefined )=>void
 };
-const PromotionBanner: React.FC<PromotionBannerProps> = ({onPressInfo}) => {
+const PromotionBanner: React.FC<PromotionBannerProps> = ({}) => {
   const dispatch = useAppDispatch();
   const [added, setAdded] = useState(false);
   const icon = added ? <SvgCheck /> : <SvgPlus />;
   const promoData = useAppSelector(state => state.content.dumpData);
   const myList = useAppSelector(state => state.content.myList);
-  const data = promoData.find(
+  const data : ContentItem | undefined = promoData.find(
     item => item.id === 'e3d6ff24-4a98-4c74-91fe-2636f9198d1e',
   );
   const handleAdd = async () => {
-    if (added && data ) {
-      await dispatch(removeToMyListAsync(data));
-      setAdded(false);
-    }
-    if (!myList.some(existingItem => existingItem.id === data?.id) && data) {
-      await dispatch(addToMyListAsync(data));
-      setAdded(true);
-    }
+  if (added && data) {
+    await dispatch(removeToMyListAsync(data));
+  } else if (!myList.some(existingItem => existingItem.id === data?.id) && data) {
+    await dispatch(addToMyListAsync(data));
+  }
+  setAdded(!added);
   };
 
+  const onPressInfo = () => data !== undefined && dispatch(setSelectedContent(data));
   return (
     <BannerBackground source={images.bannerBander}>
       <ContainerContent>
@@ -73,7 +71,7 @@ const PromotionBanner: React.FC<PromotionBannerProps> = ({onPressInfo}) => {
 
           <TouchTextIcon
             icon={<SvgInfo />}
-            onPress={() =>onPressInfo(data)}
+            onPress={onPressInfo}
             text="Info"
           />
         </View>

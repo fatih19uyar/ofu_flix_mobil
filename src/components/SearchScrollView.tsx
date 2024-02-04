@@ -79,10 +79,8 @@ interface SearchScrollViewProps {
 
 const SearchScrollView: React.FC<SearchScrollViewProps> = ({dataList}) => {
   const now = new Date();
-  const navigation = useTypedNavigation();
   const formattedDate = `${now.getDate()}.${now.getMonth() + 1}.${now.getFullYear()}`;
   const dispatch = useAppDispatch();
-
 
   const [showHeader, setShowHeader] = React.useState(true);
   const [offset, setOffset] = React.useState(0);
@@ -101,10 +99,9 @@ const SearchScrollView: React.FC<SearchScrollViewProps> = ({dataList}) => {
     setOffset(currentOffset);
   };
 
-  const onClick = (data:ContentItem) =>{
-    //navigation.navigate('Content', {data});
+  const onClick = (data: ContentItem) => {
     dispatch(setSelectedContent(data));
-  }
+  };
   
   return dataList.length > 0 ? (
 

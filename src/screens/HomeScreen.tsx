@@ -46,7 +46,7 @@ const Home: React.FC = () => {
         onScroll={onScroll}
         scrollEventThrottle={16}
         showsVerticalScrollIndicator={false}>
-        <PromotionBanner onPressInfo={()=>{}}/>
+        <PromotionBanner/>
 
         <Text style={gStyle.heading}>Previews</Text>
         <ShowScroller dataset="previews" />
@@ -54,7 +54,7 @@ const Home: React.FC = () => {
         <Text style={gStyle.heading}>My List</Text>
         <ShowScroller dataset="myList" />
 
-        <Text style={gStyle.heading}>Popular on Netflix</Text>
+        <Text style={gStyle.heading}>Popular on OfuFlix</Text>
         <ShowScroller dataset="dumbData" />
 
         <Text style={gStyle.heading}>Trending Now</Text>

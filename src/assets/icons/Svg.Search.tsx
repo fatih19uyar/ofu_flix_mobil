@@ -8,7 +8,7 @@ interface SvgSearchProps {
   size?: number;
 }
 
-const SvgSearch: React.FC<SvgSearchProps> = ({ fill, size, ...rest }) => {
+const SvgSearch: React.FC<SvgSearchProps> = ({ fill, size = 24, ...rest }) => {
   return (
     <Svg height={size} width={size} viewBox="0 0 24 24" {...rest}>
       <Path

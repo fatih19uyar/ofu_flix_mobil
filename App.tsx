@@ -19,7 +19,6 @@ const App = () => {
   useEffect(() => {
     const initializeApp = ()=> {
       store.dispatch(initialize());
-      console.log('initializeApp');
     };
     initializeApp();
   }, [])

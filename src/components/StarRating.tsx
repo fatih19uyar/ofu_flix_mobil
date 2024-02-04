@@ -44,15 +44,7 @@ const StarRating: React.FC<StarRatingProps> = ({size = 24, rateStatus}) => {
         justifyContent: 'center',
         alignItems: 'center',
       }}>
-      {!showAllStars ? (
-        <TouchableOpacity onPress={() => handleRating(1)}>
-          <StarContainer>
-            <SvgStar />
-          </StarContainer>
-        </TouchableOpacity>
-      ) : (
-        renderStars([rateStatus])
-      )}
+      {renderStars([rateStatus])}
     </View>
   );
 };
