@@ -23,7 +23,7 @@ export type RootStackParamList = {
   ResetPasswordScreen : {} | undefined;
   ProfileSelectionScreen : {} | undefined;
   AppNavigation: {} | undefined;
-  MediaShowCaseScreen: ContentItem ;
+  MediaShowCaseScreen:  ContentItem ;
 };
 
 export interface Show {

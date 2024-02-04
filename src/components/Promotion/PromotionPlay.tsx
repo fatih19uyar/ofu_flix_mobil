@@ -1,10 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 import {TouchableOpacity, View, Text} from 'react-native';
 import {colors, fonts, gStyle} from '../../constants';
 import SvgPlay from '../../assets/icons/Svg.Play';
 import {useTypedNavigation} from '../../common/hooks/useNavigation';
+import { ContentItem } from '../../store/content/type';
+import { useAppDispatch } from '../../common/hooks/useStore';
+import { removeSelectedContent } from '../../store/content/contentSlice';
+import { setLoading } from '../../store/common/commonSlice';
 
 const Container = styled(TouchableOpacity)`
   align-items: center;
@@ -29,23 +32,27 @@ const IconContainer = styled(View)`
 interface PromotionPlayProps {
   icon?: React.ReactElement;
   iconSize?: number;
-  onPress: () => void;
   text?: string;
   textSize?: number;
+  data : ContentItem;
 }
 
 const PromotionPlay: React.FC<PromotionPlayProps> = ({
   icon = <SvgPlay />,
-  onPress,
   text = 'Play',
+  data ,
   textSize = 18,
   iconSize = 24,
 }) => {
   const navigation = useTypedNavigation();
-  const onClick = () => {
-    console.log('test');
-  };
+  const dispatch = useAppDispatch();
   const adjustedIcon = React.cloneElement(icon, { size: iconSize, fill: colors.black });
+
+  const onClick = () => {
+    dispatch(removeSelectedContent());
+    dispatch(setLoading(true));
+    navigation.navigate('MediaShowCaseScreen', data);
+  };
 
   return (
     <Container activeOpacity={gStyle.activeOpacity} onPress={onClick}>
@@ -54,7 +61,7 @@ const PromotionPlay: React.FC<PromotionPlayProps> = ({
       </IconContainer>
       <TextStyled textSize={textSize}>{text}</TextStyled>
     </Container>
-  );
+  );  
 };
 
 export default PromotionPlay;

@@ -1,34 +1,32 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import YoutubePlayer from 'react-native-youtube-iframe';
-import {Button, View, Alert} from 'react-native';
+import { View, Alert} from 'react-native';
+import { useAppDispatch } from '../common/hooks/useStore';
+import { setLoading } from '../store/common/commonSlice';
 
 interface VideoPlayerProps {
-  url: string;
+  id: string;
 }
 
-const VideoPlayer: React.FC<VideoPlayerProps> = ({url}) => {
+const VideoPlayer: React.FC<VideoPlayerProps> = ({id}) => {
+  const dispatch = useAppDispatch();
   const [playing, setPlaying] = useState(false);
 
   const onStateChange = React.useCallback((state: any) => {
     if (state === 'ended') {
       setPlaying(false);
-      Alert.alert('video has finished playing!');
+      Alert.alert('Do u want onether one?');
     }
-  }, []);
-  const togglePlaying = React.useCallback(() => {
-    setPlaying(prev => !prev);
   }, []);
 
   return (
-    <View>
       <YoutubePlayer
-        height={300}
+        height={250}
         play={playing}
-        videoId={'iee2TATGMyI'}
+        videoId={id}
         onChangeState={onStateChange}
+        onReady={()=>dispatch(setLoading(false))}
       />
-      <Button title={playing ? 'pause' : 'play'} onPress={togglePlaying} />
-    </View>
   );
 };
 

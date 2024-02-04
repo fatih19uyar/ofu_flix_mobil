@@ -103,8 +103,6 @@ const ShowDetailsModal: React.FC = ({}) => {
     setAdded(myList.some(existingItem => existingItem.id === selectedContent?.id));
   }, [selectedContent, myList]);
   
-
-
   const handleAdd = async () => {
     if (added && selectedContent) {
       await dispatch(removeToMyListAsync(selectedContent));
@@ -138,7 +136,11 @@ const ShowDetailsModal: React.FC = ({}) => {
               <DescText>{selectedContent?.desc}</DescText>
             </TextContainer>
             <StyledPromotionView>
-              <PromotionPlay onPress={() => {}} />
+              {selectedContent ? (
+                <PromotionPlay data={selectedContent} />
+              ) : (
+                <></>
+              )}
               <TouchTextIcon
                 icon={icon}
                 onPress={() => handleAdd()}

@@ -98,12 +98,9 @@ const ContentScrollView: React.FC<ContentScrollViewProps> = ({dataList}) => {
     setOffset(currentOffset);
   };
 
-  const onClick = (data: ContentItem) => {
-    dispatch(setSelectedContent(data));
+  const onClick = (item: ContentItem) => {
+    dispatch(setSelectedContent(item));
   };
-  const onPlayClick = (data: ContentItem) => {
-      console.log(data)
-  }
   
   return dataList.length > 0 ? (
 
@@ -125,7 +122,7 @@ const ContentScrollView: React.FC<ContentScrollViewProps> = ({dataList}) => {
             <StarRating rateStatus={item.rate ?? 1}/>
           </TitleContainer>
           <IconContainer>
-            <PromotionPlay textSize={10}  iconSize={15} onPress={()=>{onPlayClick(item)}}/>
+            <PromotionPlay textSize={10} iconSize={15} data={item} />
           </IconContainer>
         </SearchResultItem>
         </TouchableOpacity>

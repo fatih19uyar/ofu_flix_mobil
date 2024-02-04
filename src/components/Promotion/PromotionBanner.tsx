@@ -59,21 +59,10 @@ const PromotionBanner: React.FC<PromotionBannerProps> = ({}) => {
     <BannerBackground source={images.bannerBander}>
       <ContainerContent>
         <LogoImage source={images.logoBander} />
-
         <View style={gStyle.flexRowSpace as ViewProps}>
-          <TouchTextIcon
-            icon={icon}
-            onPress={handleAdd}
-            text="My List"
-          />
-
-          <PromotionPlay onPress={() => null} />
-
-          <TouchTextIcon
-            icon={<SvgInfo />}
-            onPress={onPressInfo}
-            text="Info"
-          />
+          <TouchTextIcon icon={icon} onPress={handleAdd} text="My List" />
+          {data ? <PromotionPlay data={data} /> : <></>}
+          <TouchTextIcon icon={<SvgInfo />} onPress={onPressInfo} text="Info" />
         </View>
       </ContainerContent>
     </BannerBackground>
