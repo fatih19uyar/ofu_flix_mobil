@@ -7,6 +7,7 @@ import HeaderHome from '../../components/Header/HeaderHome';
 import Cast from '../../components/Cast';
 import { useAppSelector } from '../../common/hooks/useStore';
 import ContentScrollView from '../../components/ContentScrollView';
+import ShowDetailsModal from '../../components/ShowDetailsModal';
 
 const MyList: React.FC = () => {
     const myListArrray = useAppSelector(state => state.content.myList)
@@ -17,6 +18,7 @@ const MyList: React.FC = () => {
         <ContentScrollView dataList={myListArrray}/>
       <View style={gStyle.pHHalf}>
       </View>
+      <ShowDetailsModal/>
       <Cast />
     </View>
   );
