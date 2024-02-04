@@ -17,6 +17,7 @@ import { logout } from '../../store/login/loginSlice';
 import { setLoading } from '../../store/common/commonSlice';
 import { initialRouteNameSet } from '../../store/navigation/navigationSlice';
 import { deleteMyList } from '../../store/content/contentSlice';
+import useToastMessage from '../../common/hooks/useToastMessage';
 
 const privacyUrl = 'https://help.netflix.com/legal/privacy?headless=true';
 
@@ -38,6 +39,7 @@ const VersionText = styled.Text`
 
 const More: React.FC<MoreProps> = () => {
   const navigation = useTypedNavigation();
+  const {showToast} = useToastMessage();
   const appVersion = require('../../../package.json').version;
   const dispatch = useAppDispatch();
 
@@ -49,6 +51,11 @@ const More: React.FC<MoreProps> = () => {
       {cancelable: false},
     );
   };
+
+  const alertPrivacy = () => {
+    showToast({type: 'info', text1: 'Coming soon....'});
+  };
+
   const logOutFunc = async () => {
     dispatch(setLoading(true));
     dispatch(logout());
@@ -91,7 +98,7 @@ const More: React.FC<MoreProps> = () => {
           showArrow={false}
           text="Privacy"
         />
-        <TouchLineItem onPress={() => null} showArrow={false} text="Help" />
+        <TouchLineItem onPress={alertPrivacy} showArrow={false} text="Help" />
         <TouchLineItem
           onPress={() => alertSignOut()}
           showArrow={false}
