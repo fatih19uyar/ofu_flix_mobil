@@ -1,79 +1,82 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# OfuFlix
 
-# Getting Started
+OfuFlix, TypeScript ve React Native kullanılarak geliştirilmiş bir film izleme platformudur.
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+## Başlangıç
 
-## Step 1: Start the Metro Server
+>**Not**: Devam etmeden önce [React Native - Çevre Kurulumu](https://reactnative.dev/docs/environment-setup) talimatlarını "Yeni bir uygulama oluşturma" adımına kadar tamamladığınızdan emin olun.
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+### Adım 1: Metro Sunucusunu Başlatın
 
-To start Metro, run the following command from the _root_ of your React Native project:
+İlk olarak, React Native ile birlikte gelen JavaScript _bundler_ olan **Metro**'yu başlatmanız gerekecek.
+
+Metro'yu başlatmak için, React Native proje _kökünden_ aşağıdaki komutu çalıştırın:
 
 ```bash
-# using npm
+# npm kullanarak
 npm start
 
-# OR using Yarn
+# Yarn kullanarak
 yarn start
 ```
 
-## Step 2: Start your Application
+### Adım 2: Uygulamanızı Başlatın
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+Metro Bundler'ı kendi _terminalinde_ çalıştırın. React Native proje _kökünden_ yeni bir terminal açın ve aşağıdaki komutu çalıştırarak _Android_ veya _iOS_ uygulamanızı başlatın:
 
-### For Android
+#### Android İçin
 
-```bash
-# using npm
+# npm kullanarak
 npm run android
 
-# OR using Yarn
+# Yarn kullanarak
 yarn android
 ```
 
-### For iOS
+#### iOS İçin
 
-```bash
-# using npm
+# npm kullanarak
 npm run ios
 
-# OR using Yarn
+# Yarn kullanarak
 yarn ios
 ```
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
+Her şey doğru bir şekilde ayarlandıysa, uygulamanızı _Android Emulator_ veya _iOS Simulator_'de kısa süre içinde görmelisiniz. Emülatör/simülatörünüzü doğru bir şekilde kurduğunuza emin olun.
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
+Bu, uygulamanızı çalıştırmanın bir yolu — aynı zamanda doğrudan Android Studio ve Xcode içinden de çalıştırabilirsiniz.
 
-## Step 3: Modifying your App
+### Adım 3: Uygulamanızı Düzenleme
 
-Now that you have successfully run the app, let's modify it.
+Uygulamayı başarıyla çalıştırdığınıza göre, şimdi onu düzenleyelim.
 
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
+1. `App.tsx` dosyasını tercih ettiğiniz metin düzenleyicinizde açın ve bazı satırları düzenleyin.
+2. **Android için**: Değişikliklerinizi görmek için <kbd>R</kbd> tuşuna iki kez basın veya **Geliştirici Menüsü**'nden **"Yeniden Yükle"**'yi seçin (<kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows ve Linux) veya <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS))!
 
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
+   **iOS için**: Değişiklikleri görmek için iOS Simulator'da <kbd>Cmd ⌘</kbd> + <kbd>R</kbd>'ye basın ve uygulamayı yeniden yükleyin!
 
-## Congratulations! :tada:
+## Kullanılan API'ler 
 
-You've successfully run and modified your React Native App. :partying_face:
+- **@hookform/resolvers**: React Hook Form için doğrulama çözümleri sağlar.
+- **@react-native-async-storage/async-storage**: Verileri asenkron olarak depolamak ve almak için kullanılır.
+- **@react-native-community/viewpager**: Android ve iOS için sayfa geçişlerini sağlar.
+- **@react-navigation/bottom-tabs**: Alt sekmeli gezinme için bir React Navigation bileşeni.
+- **@react-navigation/native**: Ekranlar arası gezinme için temel React Navigation paketi.
+- **@react-navigation/native-stack**: Stack tabanlı gezinme için React Navigation paketi.
+- **@react-navigation/stack**: Stack tabanlı gezinme için temel React Navigation paketi.
+- **@reduxjs/toolkit**: Redux için kullanışlı araçlar sağlayan bir kit.
+- **@types/jwt-decode**: JWT token'ları için TypeScript tür tanımlamaları.
+- **react-native-dotenv**: Çevresel değişkenleri kullanarak konfigürasyon yönetimi için.
+- **react-native-elements**: Önceden tasarlanmış UI bileşenleri sağlar.
+- **react-native-gesture-handler**: Dokunmatik etkileşimleri işlemek için kullanılır.
+- **react-native-reanimated**: Yüksek performanslı animasyonlar için kullanılan bir kütüphane.
+- **react-native-safe-area-context**: Cihazın güvenli bölgelerini kontrol etmek için.
+- **react-native-youtube-iframe**: YouTube videolarını oynatmak için kullanılır.
+- **styled-components**: CSS-in-JS yaklaşımını benimseyen bir stil kütüphanesi.
+- **yup**: Şema tabanlı nesne doğrulama için.
 
-### Now what?
+## Tebrikler!
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
+OfuFlix uygulamanızı başarıyla çalıştırdınız ve düzenlediniz. :partying_face:
 
-# Troubleshooting
-
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+```
