@@ -18,15 +18,4 @@ const SvgSearch: React.FC<SvgSearchProps> = ({ fill, size, ...rest }) => {
     </Svg>
   );
 };
-
-SvgSearch.defaultProps = {
-  fill: colors.black,
-  size: 24,
-};
-
-SvgSearch.propTypes = {
-  fill: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  size: PropTypes.number,
-};
-
 export default React.memo(SvgSearch);

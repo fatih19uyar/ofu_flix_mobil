@@ -19,14 +19,4 @@ const SvgPlus: React.FC<SvgPlusProps> = ({ active = true, size = 24 }) => {
   );
 };
 
-SvgPlus.defaultProps = {
-  active: true,
-  size: 24,
-};
-
-SvgPlus.propTypes = {
-  active: PropTypes.bool,
-  size: PropTypes.number,
-};
-
 export default React.memo(SvgPlus);

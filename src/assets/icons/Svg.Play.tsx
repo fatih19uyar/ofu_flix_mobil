@@ -26,18 +26,6 @@ const SvgPlay: React.FC<SvgPlayProps> = ({ active = true, fill, size = 20 }) => 
   );
 };
 
-SvgPlay.defaultProps = {
-  active: true,
-  fill: null,
-  size: 20,
-};
-
-SvgPlay.propTypes = {
-  active: PropTypes.bool,
-  fill: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  size: PropTypes.number,
-};
-
 const styles = StyleSheet.create({
   container: {
     paddingBottom: 3,
