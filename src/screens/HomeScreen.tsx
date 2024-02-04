@@ -9,31 +9,17 @@ import ShowScroller from '../components/ShowScroller';
 import HeaderHome from '../components/Header/HeaderHome';
 import PromotionBanner from '../components/Promotion/PromotionBanner';
 import ShowDetailsModal from '../components/ShowDetailsModal';
-import useToastMessage from '../common/hooks/useToastMessage';
 
-import { StatusEnum } from '../utils/colorUtil';
-import { ContentItem } from '../store/content/type';
+import { useTypedNavigation } from '../common/hooks/useNavigation';
 
 const Home: React.FC = () => {
-  const {showToast} = useToastMessage();
   // on active tab press, scroll to top
+  const navigation = useTypedNavigation();
   const ref = React.useRef(null);
   useScrollToTop(ref);
   // local state
   const [showHeader, setShowHeader] = React.useState(true);
   const [offset, setOffset] = React.useState(0);
-  const [modalVisible, setModalVisible] = React.useState(false);
-  const [selectedItem, setSelectedItem] = React.useState<ContentItem | null>(null);
-
-  const closeModal = () => {
-    setModalVisible(false);
-    setSelectedItem(null);
-  };
-
-  const openModal = (data: ContentItem) => {
-    setSelectedItem(data);
-    setModalVisible(true);
-  };
 
   const onScroll = (event:  NativeSyntheticEvent<NativeScrollEvent>) => {
     let show = showHeader;
@@ -49,11 +35,6 @@ const Home: React.FC = () => {
 
     setOffset(currentOffset);
   };
-  const handleWatchNow = (id: string) => {
-    console.log(id);
-    showToast({type:'success', text1: 'Incomming soon...'});
-    closeModal();
-  };
   
   return (
     <View style={gStyle.container}>
@@ -65,29 +46,24 @@ const Home: React.FC = () => {
         onScroll={onScroll}
         scrollEventThrottle={16}
         showsVerticalScrollIndicator={false}>
-        <PromotionBanner />
+        <PromotionBanner onPressInfo={()=>{}}/>
 
         <Text style={gStyle.heading}>Previews</Text>
-        <ShowScroller dataset="previews" handlePress={openModal} />
+        <ShowScroller dataset="previews" />
 
         <Text style={gStyle.heading}>My List</Text>
-        <ShowScroller dataset="myList" handlePress={openModal} />
+        <ShowScroller dataset="myList" />
 
         <Text style={gStyle.heading}>Popular on Netflix</Text>
-        <ShowScroller dataset="dumbData" handlePress={openModal} />
+        <ShowScroller dataset="dumbData" />
 
         <Text style={gStyle.heading}>Trending Now</Text>
-        <ShowScroller dataset="previews" handlePress={openModal} />
+        <ShowScroller dataset="previews" />
 
         <View style={gStyle.spacer3} />
       </ScrollView>
       <Cast />
-      <ShowDetailsModal
-        isVisible={modalVisible}
-        data={selectedItem}
-        onClose={closeModal}
-        handleWatchNow={handleWatchNow}
-      />
+      <ShowDetailsModal />
     </View>
   );
 };
