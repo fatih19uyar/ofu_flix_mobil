@@ -4,7 +4,6 @@ import { ErrorResponse } from '../common/type';
 import axiosInstance from '../../hooks/useAxios';
 import { LoginRequest, LoginResponse } from './type';
 import useToastMessage from '../../hooks/useToastMessage';
-import { StatusEnum } from '../../../utils/colorUtil';
 
 export const login = async (request: LoginRequest): Promise<LoginResponse| undefined> => {
   const { showToast } = useToastMessage(); 
@@ -17,7 +16,7 @@ export const login = async (request: LoginRequest): Promise<LoginResponse| undef
     return response.data;
   } catch (error) {
     const err = error as AxiosError<ErrorResponse>;
-    showToast(StatusEnum.ERROR, err.response?.data?.message?.message ?? 'Bir hata oluştu');
+    showToast({type:"error", text1: err.response?.data?.message?.message ?? 'Bir hata oluştu'} );
   }
 };
 
@@ -28,7 +27,7 @@ export const logOut = async (): Promise<boolean | undefined> => {
     return response.status === 200;
   } catch (error) {
     const err = error as AxiosError<ErrorResponse>;
-    showToast(StatusEnum.ERROR, err.response?.data?.message?.message ?? 'Bir hata oluştu');
+    showToast({type:"error", text1: err.response?.data?.message?.message ?? 'Bir hata oluştu'} );
   }
 };
 
